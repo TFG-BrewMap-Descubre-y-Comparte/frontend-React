@@ -12,22 +12,22 @@ function RouteForm() {
         descriptionRoute: "A walking route through the landmarks of Sevilla.",
         cityName: "Seville",
         checkpoints: [
-            {
-                nameCheckpoint: "Iglesia de San Juan de la Palma",
-                coordinates: {
-                  startLatitude: 37.386,
-                  startLongitude: -5.985,
-                  endLatitude: 37.3862,
-                  endLongitude: -5.9845
-                }
+              {
+                  nameCheckpoint: "Iglesia de la Basílica de la Macarena",
+                  coordinates: {
+                    startLatitude: 37.4025,
+                    startLongitude: -5.9894,
+                    endLatitude: 37.403,
+                    endLongitude: -5.9889
+                  }
               },
               {
-                nameCheckpoint: "Iglesia de la Basílica de la Macarena",
+                nameCheckpoint: "Iglesia de San Juan de la Palma",
                 coordinates: {
-                  startLatitude: 37.3865,
-                  startLongitude: -5.9867,
-                  endLatitude: 37.387,
-                  endLongitude: -5.986
+                  startLatitude: 37.3953,
+                  startLongitude: -5.9911,
+                  endLatitude: 37.3958,
+                  endLongitude: -5.9906
                 }
               },
               {
