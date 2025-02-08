@@ -1,0 +1,135 @@
+import { useState } from "react";
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const styles = {
+    navbar: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      background: "white",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+      zIndex: 10,
+      padding: "8px 24px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    logo: {
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+    },
+    navLinks: {
+      display: "flex",
+      gap: "20px",
+      listStyle: "none",
+      paddingRight: "60px",
+    },
+    link: {
+      textDecoration: "none",
+      color: "#4a4a4a",
+      transition: "color 0.3s ease",
+    },
+    hamburger: {
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      display: "none",
+      paddingRight: "60px",
+    },
+    icon: {
+      width: "24px",
+      height: "24px",
+      color: "#4a4a4a",
+    },
+    mobileMenu: {
+      position: "fixed",
+      top: 0,
+      right: isMobileMenuOpen ? "0" : "-100%",
+      width: "60%",
+      height: "100%",
+      background: "white",
+      zIndex: 20,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      transition: "right 0.3s ease-in-out",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    },
+    closeBtn: {
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      alignSelf: "flex-end",
+      margin: "16px",
+    },
+    mobileNavLinks: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "24px",
+      listStyle: "none",
+      textAlign: "center",
+    },
+  };
+
+  return (
+    <>
+      <header style={styles.navbar}>
+        <div style={styles.logo}>RutasApp</div>
+
+        {/* Botón de menú hamburguesa en móvil */}
+        <button
+          onClick={() => setIsMobileMenuOpen(true)}
+          style={{ ...styles.hamburger, display: "block" }}
+          className="mobile-only"
+        >
+          <svg style={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        {/* Menú de navegación en pantallas grandes */}
+        <ul style={{ ...styles.navLinks, display: "none" }} className="desktop-only">
+          <li><a href="/home" style={styles.link}>Inicio</a></li>
+          <li><a href="/start" style={styles.link}>Empezar</a></li>
+          <li><a href="/about" style={styles.link}>Acerca</a></li>
+          <li><a href="/contact" style={styles.link}>Contacto</a></li>
+        </ul>
+      </header>
+
+      {/* Menú móvil */}
+      <div style={styles.mobileMenu}>
+        <button onClick={() => setIsMobileMenuOpen(false)} style={styles.closeBtn}>
+          <svg style={styles.icon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <ul style={styles.mobileNavLinks}>
+          <li><a href="/home" style={styles.link}>Inicio</a></li>
+          <li><a href="/start" style={styles.link}>Empezar</a></li>
+          <li><a href="/about" style={styles.link}>Acerca</a></li>
+          <li><a href="/contact" style={styles.link}>Contacto</a></li>
+        </ul>
+      </div>
+
+      {/* Estilos para mostrar/ocultar según el tamaño de pantalla */}
+      <style>
+        {`
+          @media (min-width: 768px) {
+            .mobile-only {
+              display: none !important;
+            }
+            .desktop-only {
+              display: flex !important;
+            }
+          }
+        `}
+      </style>
+    </>
+  );
+};
+
+export default Navbar;
