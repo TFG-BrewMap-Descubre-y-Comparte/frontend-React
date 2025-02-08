@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -93,10 +94,10 @@ const Navbar = () => {
 
         {/* Menú de navegación en pantallas grandes */}
         <ul style={{ ...styles.navLinks, display: "none" }} className="desktop-only">
-          <li><a href="/home" style={styles.link}>Inicio</a></li>
-          <li><a href="/start" style={styles.link}>Empezar</a></li>
-          <li><a href="/about" style={styles.link}>Acerca</a></li>
-          <li><a href="/contact" style={styles.link}>Contacto</a></li>
+          <li><Link to="/" style={styles.link}>Inicio</Link></li>
+          <li><Link to="/start" style={styles.link}>Empezar</Link></li>
+          <li><Link to="/about" style={styles.link}>Acerca</Link></li>
+          <li><Link to="/contact" style={styles.link}>Contacto</Link></li>
         </ul>
       </header>
 
@@ -108,10 +109,10 @@ const Navbar = () => {
           </svg>
         </button>
         <ul style={styles.mobileNavLinks}>
-          <li><a href="/home" style={styles.link}>Inicio</a></li>
-          <li><a href="/start" style={styles.link}>Empezar</a></li>
-          <li><a href="/about" style={styles.link}>Acerca</a></li>
-          <li><a href="/contact" style={styles.link}>Contacto</a></li>
+          <li><Link to="/" style={styles.link}>Inicio</Link></li>
+          <li><Link to="/start" style={styles.link}>Empezar</Link></li>
+          <li><Link to="/about" style={styles.link}>Acerca</Link></li>
+          <li><Link to="/contact" style={styles.link}>Contacto</Link></li>
         </ul>
       </div>
 
