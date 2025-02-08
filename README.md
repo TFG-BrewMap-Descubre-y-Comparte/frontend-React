@@ -1,8 +1,47 @@
-# React + Vite
+# Proyecto Frontend: Rutas Turísticas con React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este documento describe el propósito y la organización del frontend de la aplicación de rutas turísticas, desarrollado con React.
 
-Currently, two official plugins are available:
+## Propósito del Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El objetivo del frontend es proporcionar una interfaz intuitiva y atractiva para los usuarios que deseen interactuar con el sistema de rutas turísticas. Esto incluye:
+
+- **Gestíon de Usuarios:**
+
+  - Registro y login de usuarios para personalizar la experiencia.
+  - Permitir la autenticación segura.
+
+- **Exploración de Rutas:**
+
+  - Visualización de rutas turísticas creadas.
+  - Asociación de checkpoints a las rutas.
+
+- **Audioguías:**
+
+  - Integrar audioguías relacionadas con cada checkpoint para enriquecer la experiencia del usuario.
+
+- **Comentarios:**
+  - Permitir que los usuarios dejen comentarios en las rutas para compartir opiniones o información relevante.
+
+## Tecnologías Utilizadas
+
+- **React:** Biblioteca principal para la construcción de componentes y la gestión de estados.
+
+## Integración con Microservicios
+
+1. **Usuario:**
+
+   - Autenticación y registro.
+   - Gestiona tokens para proteger rutas privadas.
+
+2. **Audioguías:**
+
+   - Muestra las audioguías asociadas a cada checkpoint en una ruta.
+
+3. **Route/Checkpoint:**
+
+   - Listado y detalles de rutas.
+   - Visualización de checkpoints asociados a una ruta.
+
+4. **Comentarios:**
+   - Enviar y recibir comentarios sobre las rutas.
