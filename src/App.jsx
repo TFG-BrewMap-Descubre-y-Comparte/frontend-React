@@ -1,8 +1,11 @@
+// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/navbar";
 import About from "../pages/About";
-import Home from "../pages/Home"; // Asegúrate de tener una página de inicio
-import Contact from "../pages/Contact"; // Tu página de contacto
+import Contact from "../pages/Contact";
+import Ciudades from "../pages/Ciudades";
+import Home from "../pages/Home";
+import RouteForm from "../components/Routes/RouteForm";
 
 function App() {
   return (
@@ -12,6 +15,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/start" element={<Ciudades />} />
+        {/* Cambié RouterForm a RouteForm */}
+        <Route path="/RouteForm" element={<RouteForm />} /> 
       </Routes>
     </Router>
   );

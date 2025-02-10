@@ -1,0 +1,227 @@
+[
+  {
+    "country": "Spain",
+    "cities": [
+      {
+        "name": "Seville",
+        "description": "Seville is a city in the south of Spain known for its historic sites, including the famous Alcázar palace and Seville Cathedral.",
+        "image": "/src/assets//sevilla.jpg"
+      },
+      {
+        "name": "Madrid",
+        "description": "Madrid, the capital of Spain, is a vibrant city known for its grand avenues, historical landmarks, and lively cultural scene.",
+        "image": "/src/assets//madrid.jpg"
+      },
+      {
+        "name": "Barcelona",
+        "description": "Barcelona is a port city known for its unique architecture, including Antoni Gaudí's Sagrada Família and Park Güell.",
+        "image": "/src/assets//barcelona.jpg"
+      },
+      {
+        "name": "Granada",
+        "description": "Granada is famous for the Alhambra, a historic palace and fortress with stunning Islamic architecture.",
+        "image": "/src/assets//granada.jpg"
+      },
+      {
+        "name": "Valencia",
+        "description": "Valencia is known for its arts and sciences complex, futuristic architecture, and Mediterranean beaches.",
+        "image": "/src/assets//valencia.jpg"
+      },
+      {
+        "name": "Bilbao",
+        "description": "Bilbao is known for its modern architecture, including the Guggenheim Museum and its role in Basque culture.",
+        "image": "/src/assets/bilbao.jpg"
+      },
+      {
+        "name": "Malaga",
+        "description": "Malaga is a coastal city known for its historic center, Picasso Museum, and being the birthplace of Pablo Picasso.",
+        "image": "/src/assets//malaga.jpg"
+      },
+      {
+        "name": "Toledo",
+        "description": "Toledo is a historic city with medieval architecture and rich cultural heritage, located near Madrid.",
+        "image": "/src/assets/toleado.avif"
+      }
+    ]
+  },
+  {
+    "country": "France",
+    "cities": [
+      {
+        "name": "Paris",
+        "description": "Paris, the capital of France, is known for its iconic landmarks like the Eiffel Tower, the Louvre Museum, and its rich art and fashion culture.",
+        "image": "../src/assets/paris.webp"
+      },
+      {
+        "name": "Nice",
+        "description": "Nice is a French Riviera city known for its beautiful beaches, sunny weather, and vibrant arts scene.",
+        "image": "/src/assets/nice.jpg"
+      },
+      {
+        "name": "Lyon",
+        "description": "Lyon is known for its historical and architectural landmarks, as well as its culinary tradition.",
+        "image": "/src/assets/lyon.jpg"
+      },
+      {
+        "name": "Marseille",
+        "description": "Marseille is a port city known for its Mediterranean culture, seafood, and attractions like the Vieux-Port and Notre-Dame de la Garde.",
+        "image": "/src/assets/marseille.jpg"
+      },
+      {
+        "name": "Bordeaux",
+        "description": "Bordeaux is a wine-growing region known for its beautiful architecture and vineyards.",
+        "image": "/src/assets/bordeaux.jpg"
+      },
+      {
+        "name": "Toulouse",
+        "description": "Toulouse is known for its aerospace industry and pink terracotta buildings.",
+        "image": "/src/assets/tolouse.jpeg"
+      },
+      {
+        "name": "Nantes",
+        "description": "Nantes is a port city known for its maritime history and as the birthplace of Jules Verne.",
+        "image": "/src/assets/nantes.jpg"
+      },
+      {
+        "name": "Lille",
+        "description": "Lille is known for its vibrant arts scene, historic center, and being a crossroads between France and Belgium.",
+        "image": "/src/assets/lille.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Germany",
+    "cities": [
+      {
+        "name": "Berlin",
+        "description": "Berlin, the capital of Germany, is known for its history, culture, and modern landmarks like the Brandenburg Gate and Berlin Wall.",
+        "image": "/src/assets/berlin.jpg"
+      },
+      {
+        "name": "Munich",
+        "description": "Munich is famous for its beer gardens, historic architecture, and cultural events like Oktoberfest.",
+        "image": "/src/assets/munich.jpg"
+      },
+      {
+        "name": "Hamburg",
+        "description": "Hamburg is a major port city in northern Germany, known for its maritime heritage and vibrant cultural scene.",
+        "image": "/src/assets/hamburg.jpg"
+      },
+      {
+        "name": "Cologne",
+        "description": "Cologne is known for the Gothic Cologne Cathedral and its position along the Rhine River.",
+        "image": "/src/assets/cologne.jpg"
+      },
+      {
+        "name": "Frankfurt",
+        "description": "Frankfurt is Germany's financial capital, known for its skyscrapers, museums, and historic sites like the Römer.",
+        "image": "/src/assets/frankfurt.jpg"
+      },
+      {
+        "name": "Düsseldorf",
+        "description": "Düsseldorf is known for its fashion scene, art museums, and its location along the Rhine River.",
+        "image": "/src/assets/dusseldorf.jpg"
+      },
+      {
+        "name": "Stuttgart",
+        "description": "Stuttgart is known for its automobile industry, being home to Mercedes-Benz and Porsche museums.",
+        "image": "/src/assets/stuttgart.avif"
+      },
+      {
+        "name": "Nuremberg",
+        "description": "Nuremberg is known for its medieval architecture and the famous Nuremberg Trials after World War II.",
+        "image": "/src/assets/Nuremberg.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Italy",
+    "cities": [
+      {
+        "name": "Rome",
+        "description": "Rome, the capital city of Italy, is known for its nearly 3,000 years of globally influential art, architecture, and culture.",
+        "image": "/src/assets/rome.webp"
+      },
+      {
+        "name": "Venice",
+        "description": "Venice is a city in northeastern Italy known for its canals, Byzantine architecture, and the famous St. Mark's Square.",
+        "image": "/src/assets/venice.jpg"
+      },
+      {
+        "name": "Florence",
+        "description": "Florence is the birthplace of the Renaissance, known for its museums, churches, and iconic landmarks like the Florence Cathedral.",
+        "image": "/src/assets/florence.webp"
+      },
+      {
+        "name": "Milan",
+        "description": "Milan is known for its high fashion, modern architecture, and attractions like the Duomo di Milano and Leonardo da Vinci's Last Supper.",
+        "image": "/src/assets/milan.jpg"
+      },
+      {
+        "name": "Naples",
+        "description": "Naples is known for its historic city center, pizza, and as the gateway to the ancient ruins of Pompeii.",
+        "image": "/src/assets/naples+.jpg"
+      },
+      {
+        "name": "Bologna",
+        "description": "Bologna is known for its medieval towers, rich cuisine, and being home to the oldest university in the world.",
+        "image": "/src/assets/bologa.jpg"
+      },
+      {
+        "name": "Verona",
+        "description": "Verona is famous for its historical architecture and as the setting for Shakespeare's Romeo and Juliet.",
+        "image": "/src/assets/verona.jpg"
+      },
+      {
+        "name": "Genoa",
+        "description": "Genoa is a port city with a rich maritime history, famous for its old town, palaces, and aquariums.",
+        "image": "/src/assets/genoa.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Portugal",
+    "cities": [
+      {
+        "name": "Lisbon",
+        "description": "Lisbon, the capital of Portugal, is known for its cobbled streets, historic architecture, and iconic tram rides.",
+        "image": "/src/assets/lisboa.jpg"
+      },
+      {
+        "name": "Porto",
+        "description": "Porto is known for its beautiful riverside setting, historic center, and famous Port wine production.",
+        "image": "/src/assets/porto.jpg"
+      },
+      {
+        "name": "Funchal",
+        "description": "Funchal is the capital of Madeira, known for its picturesque harbor, botanical gardens, and mild climate.",
+        "image": "/src/assets/funchal.jpeg"
+      },
+      {
+        "name": "Braga",
+        "description": "Braga is known for its ancient churches and Roman history, making it one of Portugal's oldest cities.",
+        "image": "/src/assets/bgraga.jpg"
+      },
+      {
+        "name": "Coimbra",
+        "description": "Coimbra is known for its historic university and beautiful architecture, located along the Mondego River.",
+        "image": "/src/assets/coinmbra.jpg"
+      },
+      {
+        "name": "Sintra",
+        "description": "Sintra is a picturesque town known for its romantic architecture, including the Palácio da Pena and Moorish Castle.",
+        "image": "/src/assets/sintra.jpg"
+      },
+      {
+        "name": "Aveiro",
+        "description": "Aveiro is known for its canals and colorful boats, often referred to as the 'Venice of Portugal'.",
+        "image": "/src/assets/aveiro.jpg"
+      },
+      {
+        "name": "Albufeira",
+        "description": "Albufeira is a popular coastal town known for its beautiful beaches, vibrant nightlife, and historic old town.",
+        "image": "/src/assets/albufeirra.jpg"
+      }
+    ]
+  }
+]
