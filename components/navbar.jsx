@@ -1,4 +1,3 @@
-// components/Navbar.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -33,6 +32,7 @@ const Navbar = () => {
       textDecoration: 'none',
       color: '#4a4a4a',
       transition: 'color 0.3s ease',
+      fontWeight: 'bold', // Esto hace que el texto sea negrita
     },
     hamburger: {
       background: 'none',
@@ -80,8 +80,21 @@ const Navbar = () => {
   return (
     <>
       <header style={styles.navbar}>
-        <div style={styles.logo}>RutasApp</div>
-
+        <div style={styles.logo}>
+          <Link 
+            to="/" 
+            style={{
+              textDecoration: 'none', // Elimina la decoración (subrayado)
+              color: 'black',         // Establece el color del texto a negro
+              outline: 'none',        // Elimina el contorno del enlace al hacer clic
+              border: 'none',         // Elimina cualquier borde que pueda aparecer
+              background: 'none',     // Elimina el fondo del enlace
+              fontWeight: 'bold',      // Hace el texto en negrita
+            }}
+          >
+            RutasApp
+          </Link>
+        </div>
         {/* Botón de menú hamburguesa en móvil */}
         <button
           onClick={() => setIsMobileMenuOpen(true)}

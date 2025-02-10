@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa el hook useNavigate
+
 import './Ciudades.css';
 
 const Ciudades = () => {
@@ -54,23 +55,9 @@ const Ciudades = () => {
       handleCloseModal(); // Si no es Sevilla, simplemente cerrar el modal
     }
   };
-  
-  
 
   return (
     <div className="container">
-      <header className="header">
-        <nav>
-          <div className="logo">RutasApp</div>
-          <div className="menu">
-            <a href="/index.html">Inicio</a>
-            <a href="#">Empezar</a>
-            <a href="/about.html">Acerca</a>
-            <a href="/contact.html">Contacto</a>
-          </div>
-        </nav>
-      </header>
-
       <section className="search-filter">
         <input
           type="text"
@@ -112,9 +99,6 @@ const Ciudades = () => {
         </div>
       )}
 
-      <footer className="footer">
-        <p>&copy; 2025 Travel Destinations. Todos los derechos reservados.</p>
-      </footer>
     </div>
   );
 };

@@ -1,122 +1,137 @@
-import { useState } from 'react';
+import  { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer'; // Importa el Footer desde el archivo de componentes
 
 const About = () => {
-  // Estado para manejar el menú móvil
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="font-sans bg-gray-100">
-      {/* Header */}
-      <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
-        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold">RutasApp</div>
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="focus:outline-none"
-            >
-              <svg className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-          <ul className={`md:flex space-x-6 ${isMobileMenuOpen ? 'block' : 'hidden'}`} id="menu">
-            <li><a href="/" className="text-gray-700 hover:text-blue-500">Inicio</a></li>
-            <li><a href="#" className="text-gray-700 hover:text-blue-500">Empezar</a></li>
-            <li><a href="/about" className="text-gray-700 hover:text-blue-500">Acerca</a></li>
-            <li><a href="/contact" className="text-gray-700 hover:text-blue-500">Contacto</a></li>
-          </ul>
-        </nav>
-      </header>
-
+    <div className="about-container">
       {/* Menu móvil */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="fixed top-0 right-0 w-1/2 h-1/2 bg-white z-20 flex flex-col">
-          <div className="container mx-auto px-4 py-8 flex-1 flex flex-col justify-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="focus:outline-none mb-4 self-end"
-            >
-              <svg className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="mobile-menu">
+          <div className="mobile-menu-content">
+            <button onClick={() => setIsMobileMenuOpen(false)} className="close-button">
+              <svg className="close-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <ul className="space-y-4">
-              <li><a href="/" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Inicio</a></li>
-              <li><a href="#" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Empezar</a></li>
-              <li><a href="/about" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Acerca</a></li>
-              <li><a href="/contact" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Contacto</a></li>
+            <ul className="mobile-menu-list">
+              <li><Link to="/" className="mobile-menu-item">Inicio</Link></li>
+              <li><Link to="#" className="mobile-menu-item">Empezar</Link></li>
+              <li><Link to="/about" className="mobile-menu-item">Acerca</Link></li>
+              <li><Link to="/contact" className="mobile-menu-item">Contacto</Link></li>
             </ul>
           </div>
         </div>
       )}
 
-      <br /><br />
-      
       {/* Sección de contenido */}
-      <section className="bg-gray-100 py-12">
-        <div className="container mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-8">Sobre Nosotros</h2>
+      <section className="content-section">
+        <div className="content-container">
+          <h2 className="content-title">Sobre Nosotros</h2>
 
-          {/* Tarjeta 1 */}
-          <div className="flex bg-white shadow-lg rounded-lg overflow-hidden mb-6 h-48">
-            <div className="w-1/4 h-full">
-              <img className="w-full h-full object-cover" src="./img/claseInformatica.jpeg" alt="Equipo de trabajo" />
+          {/* Tarjetas */}
+          <div className="cards-container">
+            <div className="card">
+              <div className="card-image">
+                <img src="../src/assets/panoramicaSevilla.jpeg" alt="Equipo de trabajo" />
+              </div>
+              <div className="card-content">
+                <h3 className="card-title">Quiénes Somos</h3>
+                <p className="card-text">Somos un equipo apasionado y comprometido en ofrecer soluciones innovadoras.</p>
+              </div>
             </div>
-            <div className="p-6 flex-1">
-              <h3 className="text-2xl font-semibold mb-2">Quiénes Somos</h3>
-              <p className="text-gray-600">Somos un equipo apasionado y comprometido en ofrecer soluciones innovadoras que generan valor y satisfacción a nuestros clientes.</p>
+
+            <div className="card">
+              <div className="card-image">
+                <img src="../src/assets/movilGPS.jpeg" alt="Misión" />
+              </div>
+              <div className="card-content">
+                <h3 className="card-title">Nuestra Misión</h3>
+                <p className="card-text">Transformar ideas en realidades mediante servicios de alta calidad.</p>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-image">
+                <img src="../src/assets/imagenTuristas.jpeg" alt="Valores" />
+              </div>
+              <div className="card-content">
+                <h3 className="card-title">Nuestros Valores</h3>
+                <p className="card-text">Nos guiamos por la integridad, el respeto y la innovación.</p>
+              </div>
             </div>
           </div>
-
-          {/* Tarjeta 2 */}
-          <div className="flex bg-white shadow-lg rounded-lg overflow-hidden mb-6 h-48">
-            <div className="w-1/4 h-full">
-              <img className="w-full h-full object-cover" src="./img/movilGPS.jpeg" alt="Misión" />
-            </div>
-            <div className="p-6 flex-1">
-              <h3 className="text-2xl font-semibold mb-2">Nuestra Misión</h3>
-              <p className="text-gray-600">Transformar ideas en realidades mediante servicios de alta calidad que impulsen el crecimiento de nuestros clientes.</p>
-            </div>
-          </div>
-
-          {/* Tarjeta 3 */}
-          <div className="flex bg-white shadow-lg rounded-lg overflow-hidden h-48">
-            <div className="w-1/4 h-full">
-              <img className="w-full h-full object-cover" src="./img/imagenTuristas.jpeg" alt="Valores" />
-            </div>
-            <div className="p-6 flex-1">
-              <h3 className="text-2xl font-semibold mb-2">Nuestros Valores</h3>
-              <p className="text-gray-600">Nos guiamos por la integridad, el respeto y la innovación, trabajando siempre en equipo para alcanzar el éxito.</p>
-            </div>
-          </div>
-
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-10 text-center">
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold">Contáctanos</h3>
-          <p>Email: contacto@rutasapp.com</p>
-          <p>Teléfono: +34 123 456 789</p>
-        </div>
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold">Síguenos</h3>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Facebook</a>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Twitter</a>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Instagram</a>
-        </div>
-        <div>
-          <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
-          <nav className="mt-2">
-            <a href="/" className="text-white mx-2 hover:text-blue-400">Inicio</a>
-            <a href="/about" className="text-white mx-2 hover:text-blue-400">Acerca de</a>
-            <a href="/contact" className="text-white mx-2 hover:text-blue-400">Contacto</a>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
+
+      <style>{`
+        .about-container {
+          font-family: sans-serif;
+          background-color: #f7fafc;
+          width: 100vw;
+          overflow-x: hidden;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        .content-section {
+          background-color: #f7fafc;
+          padding: 3rem 1rem;
+          width: 100vw;
+          flex: 1;
+        }
+
+        .content-container {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .content-title {
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        .cards-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1rem;
+          width: 100%;
+        }
+
+        .card {
+          display: flex;
+          flex-direction: column;
+          background-color: #ffffff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 0.5rem;
+          overflow: hidden;
+          width: 100%;
+          max-width: 500px;
+        }
+
+        .card-image {
+          width: 100%;
+          height: 250px;
+        }
+
+        .card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .card-content {
+          padding: 1.5rem;
+        }
+      `}</style>
     </div>
   );
 };

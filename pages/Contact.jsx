@@ -1,106 +1,132 @@
-import  { useState } from 'react';
+import { useState } from 'react';  // Importamos useState para manejar el estado
+import Footer from '../components/Footer'; // Importa el Footer desde la carpeta de componentes
 
 const Contact = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [formSent, setFormSent] = useState(false); // Estado para controlar el mensaje de éxito
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Previene que el formulario recargue la página
+    setFormSent(true);  // Muestra el mensaje de éxito
+  };
 
   return (
-    <div className="bg-gray-100">
-      {/* Header */}
-      <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
-        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold">RutasApp</div>
-          <div className="md:hidden">
-            <button onClick={() => setIsMobileMenuOpen(true)} className="focus:outline-none">
-              <svg className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-          <ul className={`hidden md:flex space-x-6 ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-            <li><a href="/index.html" className="text-gray-700 hover:text-blue-500">Inicio</a></li>
-            <li><a href="#" className="text-gray-700 hover:text-blue-500">Empezar</a></li>
-            <li><a href="/about.html" className="text-gray-700 hover:text-blue-500">Acerca</a></li>
-            <li><a href="/contact.html" className="text-gray-700 hover:text-blue-500">Contacto</a></li>
-          </ul>
-        </nav>
-      </header>
+    <div className="contact-container">
+      <section className="content-section">
+        <div className="content-container">
+          <h2 className="content-title">Contacto</h2>
+          <p>
+            Estamos aquí para ayudarte. Si tienes alguna pregunta, no dudes en
+            ponerte en contacto con nosotros a través del siguiente formulario o
+            utilizando los datos de contacto proporcionados.
+          </p>
 
-      {/* Menu móvil */}
-      {isMobileMenuOpen && (
-        <div className="fixed top-0 right-0 w-1/2 h-full bg-white z-20 flex flex-col">
-          <div className="container mx-auto px-4 py-8 flex-1 flex flex-col justify-center">
-            <button onClick={() => setIsMobileMenuOpen(false)} className="focus:outline-none mb-4 self-end">
-              <svg className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <ul className="space-y-4">
-              <li><a href="/index.html" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Inicio</a></li>
-              <li><a href="#" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Empezar</a></li>
-              <li><a href="/about.html" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Acerca</a></li>
-              <li><a href="/contact.html" className="text-2xl font-bold text-gray-700 hover:text-blue-500">Contacto</a></li>
-            </ul>
+          {/* Mostrar mensaje de éxito si el formulario fue enviado */}
+          {formSent && <p className="success-message">¡Mensaje enviado correctamente!</p>}
+
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="name">Nombre</label>
+            <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Tu correo electrónico" />
+
+            <label htmlFor="message">Mensaje</label>
+            <textarea id="message" name="message" required rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+
+            <button type="submit">Enviar</button>
+          </form>
+
+          <div>
+            <h3>O contáctanos directamente:</h3>
+            <p>Email: contacto@rutasapp.com</p>
+            <p>Teléfono: +34 123 456 789</p>
           </div>
         </div>
-      )}
-
-      <main className="max-w-2xl mx-auto p-6 mt-24">
-        <h2 className="text-5xl font-bold text-center mb-10">Contacto</h2>
-        <h2 className="text-xl font-semibold mb-4">Estamos aquí para ayudarte</h2>
-        <p className="mb-6">Si tienes alguna pregunta, no dudes en ponerte en contacto con nosotros a través del siguiente formulario o utilizando los datos de contacto proporcionados.</p>
-
-        <form action="/contactConfirmation.html" method="GET" className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nombre</label>
-            <input type="text" id="name" name="name" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tu nombre" />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tu correo electrónico" />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">Mensaje</label>
-            <textarea id="message" name="message" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              Enviar
-            </button>
-          </div>
-        </form>
-
-        <div className="mt-8">
-          <h3 className="text-lg font-semibold">O contáctanos directamente:</h3>
-          <p>Email: contacto@rutasapp.com</p>
-          <p>Teléfono: +34 123 456 789</p>
-        </div>
-      </main>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-10 text-center">
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold">Contáctanos</h3>
-          <p>Email: contacto@rutasapp.com</p>
-          <p>Teléfono: +34 123 456 789</p>
-        </div>
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold">Síguenos</h3>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Facebook</a>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Twitter</a>
-          <a href="#" className="text-white mx-2 hover:text-blue-400">Instagram</a>
-        </div>
-        <div>
-          <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
-          <nav className="mt-2">
-            <a href="/index.html" className="text-white mx-2 hover:text-blue-400">Inicio</a>
-            <a href="/about.html" className="text-white mx-2 hover:text-blue-400">Acerca de</a>
-            <a href="/contact.html" className="text-white mx-2 hover:text-blue-400">Contacto</a>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
+
+      <style>{`
+        .contact-container {
+          font-family: sans-serif;
+          background-color: #f7fafc;
+          width: 100vw;
+          overflow-x: hidden;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        .content-section {
+          background-color: #f7fafc;
+          padding: 3rem 1rem;
+          width: 100vw;
+          flex: 1;
+        }
+
+        .content-container {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .content-title {
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        form {
+          background: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          margin-bottom: 20px;
+        }
+
+        label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 15px;
+        }
+
+        button {
+          background-color: #4299e1;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: #3182ce;
+        }
+
+        /* Asegura que el Footer se mantenga abajo pero sin bloquear el scroll */
+        footer {
+          margin-top: auto; /* Empuja el footer a la parte inferior de la página */
+        }
+
+        .success-message {
+          background-color: #d4edda;
+          color: #155724;
+          border: 1px solid #c3e6cb;
+          padding: 10px;
+          border-radius: 4px;
+          margin-top: 20px;
+          text-align: center;
+        }
+      `}</style>
     </div>
   );
 };
