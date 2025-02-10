@@ -8,6 +8,7 @@ const Ciudades = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);
   const [modal, setModal] = useState({ visible: false, city: null });
+  const [message, setMessage] = useState(''); // Estado para mostrar el mensaje
 
   const navigate = useNavigate(); // Hook para navegación
 
@@ -38,21 +39,21 @@ const Ciudades = () => {
 
   const handleCityClick = (city) => {
     setModal({ visible: true, city });
+    setMessage(''); // Limpiar el mensaje al abrir el modal
   };
 
   const handleCloseModal = () => {
     setModal({ visible: false, city: null });
   };
 
-  // Actualización de la función para redirigir a /RouteForm si la ciudad es Sevilla o Seville
   const handleGoToRoute = () => {
     const cityName = modal.city.name.toLowerCase();
-  
+
     // Redirigir si la ciudad seleccionada es Sevilla o Seville
     if (cityName === 'sevilla' || cityName === 'seville') {
       navigate('/RouteForm'); // Cambia la ruta aquí a '/RouteForm'
     } else {
-      handleCloseModal(); // Si no es Sevilla, simplemente cerrar el modal
+      setMessage('No hay rutas disponibles en este momento'); // Mostrar el mensaje
     }
   };
 
@@ -87,6 +88,7 @@ const Ciudades = () => {
           <div className="modal-content">
             <h3>{modal.city.name}</h3>
             <p>{modal.city.description}</p>
+            {message && <p className="message">{message}</p>} {/* Mostrar el mensaje */}
             <div className="modal-buttons">
               <button className="go-to-route" onClick={handleGoToRoute}>
                 Ir a la ruta
@@ -98,7 +100,6 @@ const Ciudades = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

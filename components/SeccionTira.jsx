@@ -9,10 +9,10 @@ const Tira = () => {
           Explora ahora las rutas más importantes de Sevilla, Madrid, Barcelona y Valencia
         </p>
         <div style={styles.buttonContainer}>
-          <a href="#" style={styles.primaryButton}>
+          <a href="/start" style={styles.primaryButton}>
             VER RUTAS
           </a>
-          <a href="#" style={styles.secondaryButton}>
+          <a href="/about" style={styles.secondaryButton}>
             QUIÉNES SOMOS
           </a>
         </div>

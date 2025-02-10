@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Ciudades from "../pages/Ciudades";
+import	RouteForm from "../components/Routes/RouteForm";
 
 
 export default function Home() {
@@ -25,7 +26,7 @@ export default function Home() {
             <Footer />
           </>
         } />
-      
+        <Route path="/RouteForm" element={<RouteForm />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/start" element={<Ciudades />} />

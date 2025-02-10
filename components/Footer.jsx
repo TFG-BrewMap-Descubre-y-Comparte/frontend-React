@@ -1,26 +1,39 @@
+import { FaFacebook, FaTwitter, FaInstagram, FaPhone, FaEnvelope, FaGithub } from 'react-icons/fa'; // Importar los iconos
+
 const Footer = () => {
   return (
     <footer style={styles.footer}>
       <div style={styles.sectionsWrapper}>
         <div style={styles.section}>
           <h3 style={styles.title}>Contáctanos</h3>
-          <p style={styles.text}>Email: contacto@rutasapp.com</p>
-          <p style={styles.text}>Teléfono: +34 123 456 789</p>
+          <p style={styles.text}>
+            <FaEnvelope style={styles.icon} /> Email: contacto@rutasapp.com
+          </p>
+          <p style={styles.text}>
+            <FaPhone style={styles.icon} /> Teléfono: +34 123 456 789
+          </p>
         </div>
         <div style={styles.section}>
           <h3 style={styles.title}>Síguenos</h3>
           <div style={styles.socialLinks}>
-            <a href="#" style={styles.link}>Facebook</a>
-            <a href="#" style={styles.link}>Twitter</a>
-            <a href="#" style={styles.link}>Instagram</a>
+            <a href="https://www.facebook.com/" style={styles.link} target="_blank" rel="noopener noreferrer">
+              <FaFacebook size={24} /> {/* Icono de Facebook */}
+            </a>
+            <a href="https://github.com/Tourist-Routes-Project" style={styles.link} target="_blank" rel="noopener noreferrer">
+              <FaGithub size={24} /> {/* Icono de GitHub */}
+            </a>
+            <a href="https://x.com/?lang=es" style={styles.link} target="_blank" rel="noopener noreferrer">
+              <FaTwitter size={24} /> {/* Icono de Twitter */}
+            </a>
+            <a href="https://www.instagram.com/" style={styles.link} target="_blank" rel="noopener noreferrer">
+              <FaInstagram size={24} /> {/* Icono de Instagram */}
+            </a>
           </div>
         </div>
         <div style={styles.section}>
           <p style={styles.text}>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
           <nav style={styles.nav}>
-            <a href="/index.html" style={styles.link}>Inicio</a>
-            <a href="/about.html" style={styles.link}>Acerca de</a>
-            <a href="/contact.html" style={styles.link}>Contacto</a>
+            {/* Aquí puedes agregar enlaces de navegación si lo deseas */}
           </nav>
         </div>
       </div>
@@ -61,6 +74,11 @@ const styles = {
     fontSize: "1rem",
     color: "#e2e8f0",
     marginBottom: "0.5rem",
+    display: "flex",
+    alignItems: "center",
+  },
+  icon: {
+    marginRight: "0.5rem", // Espacio entre el icono y el texto
   },
   link: {
     color: "#63b3ed",
@@ -78,6 +96,8 @@ const styles = {
   },
   socialLinks: {
     marginTop: "1rem",
+    display: "flex",
+    justifyContent: "center",
   },
 };
 

@@ -31,7 +31,7 @@ const Ventajas = () => {
       title: "Soporte 24h",
       description:
         "Contamos con un servicio de atención al cliente 24h en el que solucionaremos todos los problemas.",
-      link: "/contact.html",
+      link: "/contact",
       linkText: "Ver Más",
     },
     {
