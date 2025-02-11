@@ -15,9 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/start" element={<Ciudades />} />
-        {/* Cambié RouterForm a RouteForm */}
-        <Route path="/RouteForm" element={<RouteForm />} /> 
+        <Route path="/cities" element={<Ciudades />} />
+        <Route path="/route/:city" element={<RouteForm />} />
       </Routes>
     </Router>
   );

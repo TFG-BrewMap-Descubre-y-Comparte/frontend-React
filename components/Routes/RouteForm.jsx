@@ -5,15 +5,19 @@ import {
   Popup,
   Polyline,
 } from "react-leaflet";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 
 function RouteForm() {
+  const { city } = useParams();
   const [route, setRoute] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8082/api/v1/routes/city/Seville")
+    if (!city) return;
+
+    fetch(`http://localhost:8082/api/v1/routes/city/${city}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
