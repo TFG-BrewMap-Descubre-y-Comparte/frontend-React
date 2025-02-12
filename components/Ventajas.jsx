@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import '@fortawesome/fontawesome-free/css/all.min.css';  // Importar Font Awesome
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Ventajas = () => {
   // Estado para manejar el tamaño de la ventana
@@ -43,7 +43,8 @@ const Ventajas = () => {
     {
       icon: "fas fa-volume-up",
       title: "Audioguías",
-      description: "Ofrecemos audioguías para tener una mejor experiencia en tu viaje.",
+      description:
+        "Ofrecemos audioguías para tener una mejor experiencia en tu viaje.",
     },
   ];
 
@@ -53,14 +54,20 @@ const Ventajas = () => {
         <h2 style={styles.title}>Ventajas</h2>
         <div style={styles.grid}>
           {/* Columna de la izquierda con la imagen (visible solo en pantallas medianas y grandes) */}
-          <div style={isMediumScreen ? styles.imageColumnVisible : styles.imageColumnHidden}>
-            <img 
-              src="../src/assets/imagenMapaVertical.avif" 
-              alt="Tablet Image" 
-              style={styles.image} 
+          <div
+            style={
+              isMediumScreen
+                ? styles.imageColumnVisible
+                : styles.imageColumnHidden
+            }
+          >
+            <img
+              src="../src/assets/imagenMapaVertical.avif"
+              alt="Tablet Image"
+              style={styles.image}
             />
           </div>
-          
+
           {/* Columna de la derecha con las tarjetas de ventajas */}
           <div style={styles.cardContainer}>
             {ventajas.map((ventaja, index) => (

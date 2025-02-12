@@ -92,7 +92,7 @@ const Navbar = () => {
               fontWeight: "bold", // Hace el texto en negrita
             }}
           >
-            RutasApp
+            SoundWays
           </Link>
         </div>
         {/* Botón de menú hamburguesa en móvil */}
