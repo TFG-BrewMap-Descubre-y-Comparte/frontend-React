@@ -16,6 +16,9 @@ function RouteForm() {
   const [routeInfo, setRouteInfo] = useState({});
   const [coordinates, setCoordinates] = useState([37.3886, -5.9823]);
   const [loading, setLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [loadingComments, setLoadingComments] = useState(true);
 
   useEffect(() => {
     if (!city) return;
@@ -33,7 +36,6 @@ function RouteForm() {
             distance: routeData.distance,
           });
 
-          // Establecer las coordenadas iniciales del mapa basadas en el primer checkpoint
           if (routeData.checkpointHasRoute.length > 0) {
             const firstCheckpoint = routeData.checkpointHasRoute[0];
             setCoordinates([
@@ -61,18 +63,62 @@ function RouteForm() {
               })
               .catch((error) => console.error("Error fetching route:", error));
           }
+
+          // Cargar los comentarios de la ruta
+          fetch(
+            `http://localhost:8082/api/v1/comment/route/${routeData.idRoute}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              setComments(data);
+              setLoadingComments(false);
+            })
+            .catch((error) => console.error("Error fetching comments:", error));
         }
       })
       .catch((error) => console.error("Error fetching route data:", error))
       .finally(() => setLoading(false));
   }, [city]);
 
-  if (loading) {
+  const handleAddComment = () => {
+    if (newComment.trim() === "") return;
+
+    const commentData = {
+      userId: 1,
+      routeId: routeInfo.idRoute,
+      description: newComment,
+      createdDate: new Date().toISOString(),
+    };
+
+    fetch(`http://localhost:8082/api/v1/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    })
+      .then((response) => response.json())
+      .then((newComment) => {
+        setComments([...comments, newComment]);
+        setNewComment("");
+      })
+      .catch((error) => console.error("Error adding comment:", error));
+  };
+
+  // Mostrar un mensaje de carga hasta que los comentarios estén listos
+  if (loading || loadingComments) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div style={{ marginTop: "80px", padding: "20px", display: "flex" }}>
+    <div
+      style={{
+        marginTop: "80px",
+        padding: "20px",
+        display: "flex",
+        gap: "20px",
+      }}
+    >
       <div
         style={{
           backgroundColor: "#f9f9f9",
@@ -80,7 +126,7 @@ function RouteForm() {
           borderRadius: "8px",
           boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
           flex: "1",
-          fontSize: "14px",
+          fontSize: "16px",
         }}
       >
         <h2>{routeInfo.name}</h2>
@@ -95,60 +141,122 @@ function RouteForm() {
         </p>
       </div>
 
-      {/* Contenedor del mapa */}
-      <MapContainer
-        center={coordinates}
-        zoom={15}
-        className="map"
-        style={{ width: "100%", height: "500px" }}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <div style={{ display: "flex", flex: "3", gap: "20px" }}>
+        <MapContainer
+          center={coordinates}
+          zoom={15}
+          className="map"
+          style={{ width: "75%", height: "500px" }}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {/* Marcas de los checkpoints */}
-        {checkpoints.map((checkpoint, index) => (
-          <Marker
-            key={index}
-            position={[
-              checkpoint.coordinates.startLatitude,
-              checkpoint.coordinates.startLongitude,
-            ]}
+          {checkpoints.map((checkpoint, index) => (
+            <Marker
+              key={index}
+              position={[
+                checkpoint.coordinates.startLatitude,
+                checkpoint.coordinates.startLongitude,
+              ]}
+            >
+              <Popup>
+                <div>
+                  <strong>{checkpoint.nameCheckpoint}</strong>
+                  <br />
+                  {checkpoint.audioguiaDTO?.url_audioguia.includes(".mp3") ? (
+                    <audio controls>
+                      <source
+                        src={checkpoint.audioguiaDTO.url_audioguia}
+                        type="audio/mpeg"
+                      />
+                      Tu navegador no soporta el elemento de audio.
+                    </audio>
+                  ) : (
+                    <a
+                      href={checkpoint.audioguiaDTO?.url_audioguia}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Audioguía
+                    </a>
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+
+          {route.length > 0 && (
+            <Polyline
+              positions={route.map((coord) => [coord[1], coord[0]])}
+              color="red"
+              weight={4}
+              dashArray="5, 10"
+            />
+          )}
+        </MapContainer>
+
+        <div
+          style={{
+            width: "25%",
+            backgroundColor: "#f1f1f1",
+            padding: "15px",
+            borderRadius: "8px",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+          }}
+        >
+          <h3>Comentarios</h3>
+          <div
+            style={{
+              maxHeight: "400px",
+              overflowY: "auto",
+              marginBottom: "10px",
+            }}
           >
-            <Popup>
-              <div>
-                <strong>{checkpoint.nameCheckpoint}</strong>
-                <br />
-                {checkpoint.audioguiaDTO?.url_audioguia.includes(".mp3") ? (
-                  <audio controls>
-                    <source
-                      src={checkpoint.audioguiaDTO.url_audioguia}
-                      type="audio/mpeg"
-                    />
-                    Tu navegador no soporta el elemento de audio.
-                  </audio>
-                ) : (
-                  <a
-                    href={checkpoint.audioguiaDTO?.url_audioguia}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Audioguía
-                  </a>
-                )}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-
-        {/* Mostrar la ruta peatonal */}
-        {route.length > 0 && (
-          <Polyline
-            positions={route.map((coord) => [coord[1], coord[0]])}
-            color="red"
-            weight={4}
-            dashArray="5, 10"
+            {comments.length > 0 ? (
+              comments.map((comment, index) => (
+                <p
+                  key={index}
+                  style={{
+                    padding: "5px",
+                    borderBottom: "1px solid #ccc",
+                    fontSize: "14px",
+                  }}
+                >
+                  {comment.description}
+                </p>
+              ))
+            ) : (
+              <p>No hay comentarios aún.</p>
+            )}
+          </div>
+          <input
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Añadir un comentario..."
+            style={{
+              width: "100%",
+              padding: "5px",
+              marginBottom: "5px",
+              fontSize: "13px",
+            }}
           />
-        )}
-      </MapContainer>
+          <button
+            onClick={handleAddComment}
+            style={{
+              width: "100%",
+              padding: "5px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "13px",
+            }}
+          >
+            Agregar
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
