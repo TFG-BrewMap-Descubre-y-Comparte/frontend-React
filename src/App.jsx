@@ -6,6 +6,7 @@ import Contact from "../pages/Contact";
 import Ciudades from "../pages/Ciudades";
 import Home from "../pages/Home";
 import RouteForm from "../components/Routes/RouteForm";
+import TarjetaRoutes from "../components/TarjetasRoutes";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cities" element={<Ciudades />} />
         <Route path="/route/:city" element={<RouteForm />} />
+        <Route path="/tarjeta" element={<TarjetaRoutes />} />
+
       </Routes>
     </Router>
   );

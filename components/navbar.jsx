@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -84,12 +85,12 @@ const Navbar = () => {
           <Link
             to="/"
             style={{
-              textDecoration: "none", // Elimina la decoración (subrayado)
-              color: "black", // Establece el color del texto a negro
-              outline: "none", // Elimina el contorno del enlace al hacer clic
-              border: "none", // Elimina cualquier borde que pueda aparecer
-              background: "none", // Elimina el fondo del enlace
-              fontWeight: "bold", // Hace el texto en negrita
+              textDecoration: "none",
+              color: "black",
+              outline: "none",
+              border: "none",
+              background: "none",
+              fontWeight: "bold",
             }}
           >
             SoundWays
@@ -141,6 +142,8 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
+        
+         
         </ul>
       </header>
 
@@ -185,6 +188,7 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
+       
         </ul>
       </div>
 

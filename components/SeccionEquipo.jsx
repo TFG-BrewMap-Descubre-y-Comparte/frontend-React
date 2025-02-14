@@ -8,7 +8,7 @@ const SeccionEquipo = () => {
     { name: "Alejandro", img: "../src/assets/perfilAle.png" },
     { name: "Polo", img: "../src/assets/perfilPolo.jpg" },
     { name: "Fernando", img: "../src/assets/perfilFernando.png" },
-    { name: "Ortega", img: "../src/assets/perfilOrtega.png" },
+    { name: "Ortega", img: "../src/assets/perfilOrtega.jpg" },
   ];
 
   return (

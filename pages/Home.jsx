@@ -10,6 +10,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Ciudades from "../pages/Ciudades";
 import RouteForm from "../components/Routes/RouteForm";
+import TarjetaRoutes from "../components/TarjetasRoutes";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cities" element={<Ciudades />} />
+        <Route path="/TarjetaRoutes" element={<TarjetaRoutes />} />
       </Routes>
     </Router>
   );
