@@ -29,11 +29,11 @@ export default function Home() {
             </>
           }
         />
-        <Route path="/route/:city" element={<RouteForm />} />
+        <Route path="/route/:idRoute" element={<RouteForm />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cities" element={<Ciudades />} />
-        <Route path="/TarjetaRoutes" element={<TarjetaRoutes />} />
+        <Route path="/tarjeta/:city" element={<TarjetaRoutes />} />
       </Routes>
     </Router>
   );

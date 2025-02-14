@@ -47,16 +47,13 @@ const Ciudades = () => {
   };
 
   const handleGoToRoute = () => {
-  const cityName = modal.city.name.toLowerCase();
-
-  // Redirigir si la ciudad seleccionada es Sevilla o Seville
-  if (cityName === "sevilla" || cityName === "seville") {
-    navigate("/TarjetaRoutes"); // Redirigir a TarjetaRoutes
-  } else {
-    setMessage("No hay rutas disponibles en este momento"); // Mostrar el mensaje
-  }
-};
-
+    const cityName = modal.city.name.toLowerCase();
+    if (cityName === "sevilla" || cityName === "seville") {
+      navigate(`/tarjeta/${cityName}`); // Redirigir con el nombre de la ciudad
+    } else {
+      setMessage("No hay rutas disponibles en este momento");
+    }
+  };
 
   return (
     <div className="container">

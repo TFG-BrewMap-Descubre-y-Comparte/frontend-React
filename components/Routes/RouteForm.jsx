@@ -11,7 +11,7 @@ import "leaflet/dist/leaflet.css";
 import "./RouteForm.css";
 
 function RouteForm() {
-  const { city } = useParams();
+  const { idRoute } = useParams();
   const [route, setRoute] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
   const [routeInfo, setRouteInfo] = useState({});
@@ -22,64 +22,68 @@ function RouteForm() {
   const [loadingComments, setLoadingComments] = useState(true);
 
   useEffect(() => {
-    if (!city) return;
+    console.log("useEffect ejecutado con idRoute:", idRoute);
+    if (!idRoute) return;
 
-    fetch(`http://localhost:8082/api/v1/routes/city/${city}`)
+    fetch(`http://localhost:8082/api/v1/routes/${idRoute}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.length > 0) {
-          const routeData = data[0];
-          setCheckpoints(routeData.checkpointHasRoute);
-          setRouteInfo({
-            name: routeData.nameRoute,
-            description: routeData.description,
-            duration: routeData.duration,
-            distance: routeData.distance,
-          });
+        console.log("Datos recibidos de la API:", data);
+        if (!data || Object.keys(data).length === 0) {
+          console.error("No se encontraron datos para la ruta.");
+          return;
+        }
 
-          if (routeData.checkpointHasRoute.length > 0) {
-            const firstCheckpoint = routeData.checkpointHasRoute[0];
+        setCheckpoints(data.checkpointHasRoute || []);
+        setRouteInfo({
+          name: data.nameRoute,
+          description: data.description,
+          duration: data.duration,
+          distance: data.distance,
+        });
+
+        if (data.checkpointHasRoute?.length > 0) {
+          const firstCheckpoint = data.checkpointHasRoute[0];
+          if (firstCheckpoint.coordinates) {
             setCoordinates([
               firstCheckpoint.coordinates.startLatitude,
               firstCheckpoint.coordinates.startLongitude,
             ]);
           }
+        }
 
-          if (routeData.checkpointHasRoute.length > 1) {
-            const coordinatesString = routeData.checkpointHasRoute
-              .map(
-                (checkpoint) =>
-                  `${checkpoint.coordinates.startLatitude},${checkpoint.coordinates.startLongitude}`
-              )
-              .join("&point=");
-
-            fetch(
-              `https://graphhopper.com/api/1/route?point=${coordinatesString}&vehicle=foot&key=96f10560-3598-4227-87b7-c77363eb79c3&points_encoded=false&instructions=true`
+        if (data.checkpointHasRoute?.length > 1) {
+          const coordinatesString = data.checkpointHasRoute
+            .map(
+              (checkpoint) =>
+                `${checkpoint.coordinates.startLatitude},${checkpoint.coordinates.startLongitude}`
             )
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.paths && data.paths[0]) {
-                  setRoute(data.paths[0].points.coordinates);
-                }
-              })
-              .catch((error) => console.error("Error fetching route:", error));
-          }
+            .join("&point=");
 
-          // Cargar los comentarios de la ruta
           fetch(
-            `http://localhost:8082/api/v1/comment/route/${routeData.idRoute}`
+            `https://graphhopper.com/api/1/route?point=${coordinatesString}&vehicle=foot&key=96f10560-3598-4227-87b7-c77363eb79c3&points_encoded=false&instructions=true`
           )
             .then((response) => response.json())
             .then((data) => {
-              setComments(data);
-              setLoadingComments(false);
+              if (data.paths?.[0]?.points?.coordinates) {
+                setRoute(data.paths[0].points.coordinates);
+              }
             })
-            .catch((error) => console.error("Error fetching comments:", error));
+            .catch((error) => console.error("Error fetching route:", error));
         }
+
+        // Cargar los comentarios de la ruta
+        fetch(`http://localhost:8082/api/v1/comment/route/${data.idRoute}`)
+          .then((response) => response.json())
+          .then((comments) => {
+            setComments(comments);
+            setLoadingComments(false);
+          })
+          .catch((error) => console.error("Error fetching comments:", error));
       })
       .catch((error) => console.error("Error fetching route data:", error))
       .finally(() => setLoading(false));
-  }, [city]);
+  }, [idRoute]);
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
@@ -154,7 +158,7 @@ function RouteForm() {
             <strong>Duración estimada:</strong> {routeInfo.duration} minutos
           </p>
           <p>
-            <strong>Distancia total:</strong> {routeInfo.distance} km
+            <strong>Distancia total:</strong> {routeInfo.distance} metros
           </p>
         </div>
 
