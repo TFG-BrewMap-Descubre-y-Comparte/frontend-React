@@ -9,6 +9,14 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import "./RouteForm.css";
+import L from "leaflet";
+
+// Icono personalizado para la ubicación del usuario
+const userIcon = new L.Icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+});
 
 function RouteForm() {
   const { idRoute } = useParams();
@@ -20,9 +28,28 @@ function RouteForm() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loadingComments, setLoadingComments] = useState(true);
+  const [userLocation, setUserLocation] = useState(null);
+
+  // Obtener la ubicación del usuario
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        },
+        (error) => {
+          console.error("Error obteniendo la ubicación:", error);
+        }
+      );
+    } else {
+      console.warn("Geolocalización no soportada en este navegador.");
+    }
+  }, []);
 
   useEffect(() => {
-    console.log("useEffect ejecutado con idRoute:", idRoute);
     if (!idRoute) return;
 
     fetch(`http://localhost:8082/api/v1/routes/${idRoute}`)
@@ -212,6 +239,13 @@ function RouteForm() {
                 weight={4}
                 dashArray="5, 10"
               />
+            )}
+
+            {/* Marcador de la ubicación del usuario */}
+            {userLocation && (
+              <Marker position={userLocation} icon={userIcon}>
+                <Popup>Tu ubicación actual</Popup>
+              </Marker>
             )}
           </MapContainer>
 
