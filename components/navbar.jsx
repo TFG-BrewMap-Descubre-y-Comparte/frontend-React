@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const styles = {
     navbar: {
@@ -33,7 +33,26 @@ const Navbar = () => {
       textDecoration: "none",
       color: "#4a4a4a",
       transition: "color 0.3s ease",
-      fontWeight: "bold", // Esto hace que el texto sea negrita
+      fontWeight: "bold",
+      position: "relative",
+    },
+    submenu: {
+      position: "absolute",
+      top: "100%",
+      left: 0,
+      backgroundColor: "white",
+      boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
+      padding: "8px 0",
+      borderRadius: "4px",
+      display: isDropdownOpen ? "block" : "none",
+      zIndex: 20,
+    },
+    submenuItem: {
+      padding: "8px 16px",
+      textDecoration: "none",
+      color: "#4a4a4a",
+      display: "block",
+      fontWeight: "normal",
     },
     hamburger: {
       background: "none",
@@ -82,21 +101,12 @@ const Navbar = () => {
     <>
       <header style={styles.navbar}>
         <div style={styles.logo}>
-          <Link
-            to="/"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              outline: "none",
-              border: "none",
-              background: "none",
-              fontWeight: "bold",
-            }}
-          >
+          <Link to="/" style={{ ...styles.link, color: "black" }}>
             SoundWays
           </Link>
         </div>
-        {/* Botón de menú hamburguesa en móvil */}
+
+        {/* Botón hamburguesa */}
         <button
           onClick={() => setIsMobileMenuOpen(true)}
           style={{ ...styles.hamburger, display: "block" }}
@@ -117,7 +127,7 @@ const Navbar = () => {
           </svg>
         </button>
 
-        {/* Menú de navegación en pantallas grandes */}
+        {/* NAV DESKTOP */}
         <ul
           style={{ ...styles.navLinks, display: "none" }}
           className="desktop-only"
@@ -127,10 +137,20 @@ const Navbar = () => {
               Inicio
             </Link>
           </li>
-          <li>
-            <Link to="/cities" style={styles.link}>
-              Empezar
-            </Link>
+          <li
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+            style={{ position: "relative" }}
+          >
+            <span style={styles.link}>Rutas</span>
+            <div style={styles.submenu}>
+              <Link to="/cities" style={styles.submenuItem}>
+                Rutas turísticas
+              </Link>
+              <Link to="/rutas-cafe" style={styles.submenuItem}>
+                Rutas de café
+              </Link>
+            </div>
           </li>
           <li>
             <Link to="/about" style={styles.link}>
@@ -142,12 +162,10 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
-        
-         
         </ul>
       </header>
 
-      {/* Menú móvil */}
+      {/* NAV MÓVIL */}
       <div style={styles.mobileMenu}>
         <button
           onClick={() => setIsMobileMenuOpen(false)}
@@ -175,7 +193,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/cities" style={styles.link}>
-              Empezar
+              Rutas turísticas
+            </Link>
+          </li>
+          <li>
+            <Link to="/rutas-cafe" style={styles.link}>
+              Rutas de café
             </Link>
           </li>
           <li>
@@ -188,11 +211,10 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
-       
         </ul>
       </div>
 
-      {/* Estilos para mostrar/ocultar según el tamaño de pantalla */}
+      {/* RESPONSIVE STYLES */}
       <style>
         {`
           @media (min-width: 768px) {
