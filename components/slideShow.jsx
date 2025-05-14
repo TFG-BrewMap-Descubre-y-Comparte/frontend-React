@@ -92,7 +92,7 @@ const SlideShow = () => {
         {/* Texto animado con TextPressure */}
         <div style={titleStyle}>
           <TextPressure
-            text="SoundWays"
+            text="NomadTastes"
             flex={true}
             alpha={false}
             stroke={false}

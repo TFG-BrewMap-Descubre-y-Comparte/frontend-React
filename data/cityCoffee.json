@@ -1,0 +1,92 @@
+[
+  {
+    "country": "Spain",
+    "cities": [
+      {
+        "name": "Seville",
+        "description": "Seville is gaining recognition in the specialty coffee scene, with local roasters and cafes embracing high-quality beans and innovative brewing methods.",
+        "image": "/src/assets//sevilla.jpg"
+      },
+      {
+        "name": "Barcelona",
+        "description": "Barcelona is a hub for specialty coffee in Spain, with a strong presence of third wave cafes and artisan roasters that promote sustainable sourcing.",
+        "image": "/src/assets//barcelona.jpg"
+      },
+      {
+        "name": "Madrid",
+        "description": "Madrid blends tradition and innovation in its coffee culture, offering both classic cafés and a growing number of specialty coffee shops.",
+        "image": "/src/assets//madrid.jpg"
+      },
+      {
+        "name": "Valencia",
+        "description": "Valencia’s coffee culture is thriving, with local baristas focusing on quality beans and alternative brewing methods.",
+        "image": "/src/assets//valencia.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Italy",
+    "cities": [
+      {
+        "name": "Rome",
+        "description": "Rome offers a unique blend of traditional Italian espresso culture and a slow emergence of specialty coffee spots.",
+        "image": "/src/assets/rome.webp"
+      },
+      {
+        "name": "Milan",
+        "description": "Milan is Italy’s fashion and coffee capital, where espresso is an everyday ritual and specialty cafés are making their mark.",
+        "image": "/src/assets/milan.jpg"
+      },
+      {
+        "name": "Naples",
+        "description": "Naples is considered the birthplace of Italian espresso, with a strong cultural identity tied to traditional coffee bars.",
+        "image": "/src/assets/naples+.jpg"
+      }
+    ]
+  },
+  {
+    "country": "France",
+    "cities": [
+      {
+        "name": "Paris",
+        "description": "Paris is at the heart of France’s specialty coffee revolution, featuring micro-roasters and cafes that highlight origin and brewing precision.",
+        "image": "../src/assets/paris.webp"
+      },
+      {
+        "name": "Lyon",
+        "description": "Lyon has embraced specialty coffee with a growing number of third wave cafés and appreciation for sustainable practices.",
+        "image": "/src/assets/lyon.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Germany",
+    "cities": [
+      {
+        "name": "Berlin",
+        "description": "Berlin is a major center for specialty coffee in Europe, known for its innovative roasters and international café culture.",
+        "image": "/src/assets/berlin.jpg"
+      },
+      {
+        "name": "Hamburg",
+        "description": "Hamburg has a historic connection to coffee as a major port city and continues to play a key role in coffee import and roasting.",
+        "image": "/src/assets/hamburg.jpg"
+      }
+    ]
+  },
+  {
+    "country": "Portugal",
+    "cities": [
+      {
+        "name": "Lisbon",
+        "description": "Lisbon combines a strong café culture with a recent surge in specialty coffee shops and local roasters.",
+        "image": "/src/assets/lisboa.jpg"
+      },
+      {
+        "name": "Porto",
+        "description": "Porto is emerging as a destination for specialty coffee lovers, with cafés that prioritize origin and quality.",
+        "image": "/src/assets/porto.jpg"
+      }
+    ]
+  }
+]

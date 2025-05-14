@@ -1,9 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [username, setUsername] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        setUsername(payload.sub);
+      } catch (error) {
+        console.error("Token inválido", error);
+      }
+    }
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    setUsername(null);
+    navigate("/");
+  };
 
   const styles = {
     navbar: {
@@ -28,6 +50,7 @@ const Navbar = () => {
       gap: "20px",
       listStyle: "none",
       paddingRight: "60px",
+      alignItems: "center",
     },
     link: {
       textDecoration: "none",
@@ -44,7 +67,6 @@ const Navbar = () => {
       boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
       padding: "8px 0",
       borderRadius: "4px",
-      display: isDropdownOpen ? "block" : "none",
       zIndex: 20,
     },
     submenuItem: {
@@ -95,6 +117,25 @@ const Navbar = () => {
       listStyle: "none",
       textAlign: "center",
     },
+    usernameContainer: {
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+    },
+    username: {
+      fontWeight: "bold",
+      color: "#4a4a4a",
+    },
+    logoutBtn: {
+      backgroundColor: "#000000", // negro
+      color: "#ffffff", // blanco
+      border: "none",
+      padding: "6px 12px",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontWeight: "bold",
+      marginLeft: "12px",
+    },
   };
 
   return (
@@ -102,11 +143,10 @@ const Navbar = () => {
       <header style={styles.navbar}>
         <div style={styles.logo}>
           <Link to="/" style={{ ...styles.link, color: "black" }}>
-            SoundWays
+            NomadTastes
           </Link>
         </div>
 
-        {/* Botón hamburguesa */}
         <button
           onClick={() => setIsMobileMenuOpen(true)}
           style={{ ...styles.hamburger, display: "block" }}
@@ -127,7 +167,6 @@ const Navbar = () => {
           </svg>
         </button>
 
-        {/* NAV DESKTOP */}
         <ul
           style={{ ...styles.navLinks, display: "none" }}
           className="desktop-only"
@@ -138,19 +177,40 @@ const Navbar = () => {
             </Link>
           </li>
           <li
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
+            onMouseEnter={() => setOpenDropdown("rutas")}
+            onMouseLeave={() => setOpenDropdown(null)}
             style={{ position: "relative" }}
           >
             <span style={styles.link}>Rutas</span>
-            <div style={styles.submenu}>
-              <Link to="/cities" style={styles.submenuItem}>
-                Rutas turísticas
-              </Link>
-              <Link to="/rutas-cafe" style={styles.submenuItem}>
-                Rutas de café
-              </Link>
-            </div>
+            {openDropdown === "rutas" && (
+              <div style={styles.submenu}>
+                <Link to="/cities" style={styles.submenuItem}>
+                  Rutas turísticas
+                </Link>
+                <Link to="/coffeeCities" style={styles.submenuItem}>
+                  Rutas de café
+                </Link>
+              </div>
+            )}
+          </li>
+          <li
+            onMouseEnter={() => setOpenDropdown("recetas")}
+            onMouseLeave={() => setOpenDropdown(null)}
+            style={{ position: "relative" }}
+          >
+            <span style={styles.link}>Recetario</span>
+            {openDropdown === "recetas" && (
+              <div style={styles.submenu}>
+                {!username && (
+                  <Link to="/login" style={styles.submenuItem}>
+                    Login
+                  </Link>
+                )}
+                <Link to="/recipes" style={styles.submenuItem}>
+                  Lista de Recetas
+                </Link>
+              </div>
+            )}
           </li>
           <li>
             <Link to="/about" style={styles.link}>
@@ -162,10 +222,18 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
+          {username && (
+            <li style={styles.usernameContainer}>
+              <span style={styles.username}>{username}</span>
+              <button style={styles.logoutBtn} onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </header>
 
-      {/* NAV MÓVIL */}
+      {/* Menú móvil */}
       <div style={styles.mobileMenu}>
         <button
           onClick={() => setIsMobileMenuOpen(false)}
@@ -197,10 +265,22 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/rutas-cafe" style={styles.link}>
+            <Link to="/coffeeCities" style={styles.link}>
               Rutas de café
             </Link>
           </li>
+          <li>
+            <Link to="/recipes" style={styles.link}>
+              Recetario
+            </Link>
+          </li>
+          {!username && (
+            <li>
+              <Link to="/login" style={styles.link}>
+                Login
+              </Link>
+            </li>
+          )}
           <li>
             <Link to="/about" style={styles.link}>
               Acerca
@@ -211,10 +291,17 @@ const Navbar = () => {
               Contacto
             </Link>
           </li>
+          {username && (
+            <li style={styles.usernameContainer}>
+              <span style={styles.username}>{username}</span>
+              <button style={styles.logoutBtn} onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
 
-      {/* RESPONSIVE STYLES */}
       <style>
         {`
           @media (min-width: 768px) {

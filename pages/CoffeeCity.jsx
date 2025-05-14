@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Importa el hook useNavigate
+import { useNavigate } from "react-router-dom";
 
 import "./Ciudades.css";
 
-const Ciudades = () => {
+const CoffeeCity = () => {
   const [cities, setCities] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
@@ -22,7 +22,7 @@ const Ciudades = () => {
 
   const fetchDestinations = async () => {
     try {
-      const response = await fetch("../data/country.json");
+      const response = await fetch("../data/cityCoffee.json");
       const data = await response.json();
       setCities(data.flatMap((item) => item.cities));
     } catch (error) {
@@ -49,7 +49,7 @@ const Ciudades = () => {
   const handleGoToRoute = () => {
     const cityName = modal.city.name.toLowerCase();
     if (cityName === "sevilla" || cityName === "seville") {
-      navigate(`/tarjeta/${cityName}/turistica`); // Redirigir con el nombre de la ciudad
+      navigate(`/tarjetaCoffee/${cityName}/cafetera`); // Redirigir con el nombre de la ciudad
     } else {
       setMessage("No hay rutas disponibles en este momento");
     }
@@ -90,7 +90,7 @@ const Ciudades = () => {
             {/* Mostrar el mensaje */}
             <div className="modal-buttons">
               <button className="go-to-route" onClick={handleGoToRoute}>
-                Ir a la ruta turistica
+                Ir a la ruta de cafe
               </button>
               <button className="close-modal" onClick={handleCloseModal}>
                 Cerrar
@@ -103,4 +103,4 @@ const Ciudades = () => {
   );
 };
 
-export default Ciudades;
+export default CoffeeCity;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const TarjetaRoutes = () => {
+const TarjetaRoutesCoffee = () => {
   const navigate = useNavigate();
   const { city, category } = useParams();
   const [rutas, setRutas] = useState([]);
@@ -28,7 +28,7 @@ const TarjetaRoutes = () => {
   };
 
   const handleCardClick = (idRoute) => {
-    navigate(`/route/${idRoute}`);
+    navigate(`/routeCoffee/${idRoute}`);
   };
 
   return (
@@ -42,7 +42,7 @@ const TarjetaRoutes = () => {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "center",
+            justifyContent: "space-around",
             gap: "20px",
           }}
         >
@@ -54,7 +54,7 @@ const TarjetaRoutes = () => {
                 background: "#fff",
                 border: "1px solid #ddd",
                 borderRadius: "10px",
-                width: "300px",
+                width: "30%",
                 height: "420px",
                 boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
                 cursor: "pointer",
@@ -67,13 +67,14 @@ const TarjetaRoutes = () => {
               <img
                 src={
                   ruta.image ||
-                  "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=300&h=200&fit=crop"
+                  "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
                 }
                 alt={ruta.nameRoute}
                 style={{
                   width: "100%",
                   height: "180px",
                   objectFit: "cover",
+                  marginBottom: "10px",
                 }}
               />
               <div style={{ padding: "15px", flex: "1", overflow: "hidden" }}>
@@ -94,7 +95,7 @@ const TarjetaRoutes = () => {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     display: "-webkit-box",
-                    WebkitLineClamp: 5,
+                    WebkitLineClamp: 5, // Limitar a 5 líneas
                     WebkitBoxOrient: "vertical",
                   }}
                 >
@@ -111,4 +112,4 @@ const TarjetaRoutes = () => {
   );
 };
 
-export default TarjetaRoutes;
+export default TarjetaRoutesCoffee;
