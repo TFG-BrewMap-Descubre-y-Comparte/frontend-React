@@ -11,6 +11,10 @@ import TarjetaRoutes from "../components/TarjetasRoutes";
 import TarjetaRoutesCoffee from "../components/TarjetaRoutesCoffee";
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
+import RecipeList from "../components/Recipe/RecipeList";
+import RecipeDetails from "../components/Recipe/RecipeDetails";
+import AddRecipe from "../components/Recipe/AddRecipe";
+import EditRecipe from "../components/Recipe/EditRecipe";
 
 function App() {
   return (
@@ -29,6 +33,10 @@ function App() {
         />
         <Route path="/route/:idRoute" element={<RouteForm />} />
         <Route path="/routeCoffee/:idRoute" element={<RouteCoffeShop />} />
+        <Route path="/recipes" element={<RecipeList />} />
+        <Route path="/add-recipe" element={<AddRecipe />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/edit-recipe/:id" element={<EditRecipe />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
       </Routes>

@@ -209,6 +209,11 @@ const Navbar = () => {
                 <Link to="/recipes" style={styles.submenuItem}>
                   Lista de Recetas
                 </Link>
+                {username && (
+                  <Link to="/add-recipe" style={styles.submenuItem}>
+                    Añadir Receta
+                  </Link>
+                )}
               </div>
             )}
           </li>
@@ -274,6 +279,11 @@ const Navbar = () => {
               Recetario
             </Link>
           </li>
+          {username && (
+            <Link to="/add-recipe" style={styles.submenuItem}>
+              Añadir Receta
+            </Link>
+          )}
           {!username && (
             <li>
               <Link to="/login" style={styles.link}>

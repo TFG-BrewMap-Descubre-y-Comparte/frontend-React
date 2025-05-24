@@ -100,7 +100,7 @@ function RouteForm() {
         }
 
         // Cargar los comentarios de la ruta
-        fetch(`http://localhost:8082/api/v1/comment/route/${data.idRoute}`)
+        fetch(`http://localhost:8081/api/v1/comment/route/${data.idRoute}`)
           .then((response) => response.json())
           .then((comments) => {
             setComments(comments);
@@ -122,7 +122,7 @@ function RouteForm() {
       createdDate: new Date().toISOString(),
     };
 
-    fetch(`http://localhost:8082/api/v1/comment`, {
+    fetch(`http://localhost:8081/api/v1/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
