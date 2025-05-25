@@ -3,12 +3,6 @@
   background: #eee;
 }
 
-.gradient-brand-color {
-  background-image: -webkit-linear-gradient(0deg, #376be6 0%, #6470ef 100%);
-  background-image: -ms-linear-gradient(0deg, #376be6 0%, #6470ef 100%);
-  color: #fff;
-}
-
 .contact__wrapper {
   background-color: #fff;
   border-radius: 0 0 0.625rem 0.625rem;

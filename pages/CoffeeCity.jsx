@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import "./Ciudades.css";
 
 const CoffeeCity = () => {
   const [cities, setCities] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
-  const [modal, setModal] = useState({ visible: false, city: null });
-  const [message, setMessage] = useState(""); // Estado para mostrar el mensaje
 
-  const navigate = useNavigate(); // Hook para navegación
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDestinations();
@@ -38,20 +35,11 @@ const CoffeeCity = () => {
   };
 
   const handleCityClick = (city) => {
-    setModal({ visible: true, city });
-    setMessage(""); // Limpiar el mensaje al abrir el modal
-  };
-
-  const handleCloseModal = () => {
-    setModal({ visible: false, city: null });
-  };
-
-  const handleGoToRoute = () => {
-    const cityName = modal.city.name.toLowerCase();
+    const cityName = city.name.toLowerCase();
     if (cityName === "sevilla" || cityName === "seville") {
-      navigate(`/tarjetaCoffee/${cityName}/cafetera`); // Redirigir con el nombre de la ciudad
+      navigate(`/tarjetaCoffee/${cityName}/cafetera`);
     } else {
-      setMessage("No hay rutas disponibles en este momento");
+      alert("No hay rutas disponibles en este momento.");
     }
   };
 
@@ -80,25 +68,6 @@ const CoffeeCity = () => {
           ))}
         </div>
       </section>
-
-      {modal.visible && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>{modal.city.name}</h3>
-            <p>{modal.city.description}</p>
-            {message && <p className="message">{message}</p>}{" "}
-            {/* Mostrar el mensaje */}
-            <div className="modal-buttons">
-              <button className="go-to-route" onClick={handleGoToRoute}>
-                Ir a la ruta de cafe
-              </button>
-              <button className="close-modal" onClick={handleCloseModal}>
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
