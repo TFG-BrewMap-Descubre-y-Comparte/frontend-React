@@ -11,6 +11,7 @@ const RecipeList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState("");
+  const [userRole, setUserRole] = useState("");
   const recipesPerPage = 6;
 
   useEffect(() => {
@@ -20,8 +21,11 @@ const RecipeList = () => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
+        console.log("Token decodificado:", decoded);
         setUserId(Number(decoded.id_user));
         setUsername(decoded.sub);
+        setUserRole(decoded.role);
+        console.log("Rol del usuario:", decoded.role);
       } catch (error) {
         console.error("Token inválido:", error);
         localStorage.removeItem("access_token");
@@ -116,7 +120,7 @@ const RecipeList = () => {
                       Detalles
                     </button>
 
-                    {userId === recipe.userId && (
+                    {(userId === recipe.userId || userRole === "admin") && (
                       <div className="d-flex gap-2">
                         <button
                           className="btn btn-sm btn-outline-warning"
