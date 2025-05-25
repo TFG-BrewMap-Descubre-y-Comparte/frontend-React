@@ -13,7 +13,7 @@ const RegisterForm = () => {
     role: "user",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,34 +21,24 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    const form = e.target;
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.username ||
-      formData.password.length < 6
-    ) {
-      setErrorMessage("All fields are required. Password min 6 characters.");
+    if (!form.checkValidity()) {
+      e.stopPropagation();
+      setValidated(true);
       return;
     }
 
     try {
       const response = await fetch("http://localhost:8083/api/v1/insert/user", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Registration failed");
 
-      if (!response.ok) {
-        throw new Error(result.error || "Registration failed");
-      }
-
-      // Registro
       navigate("/login");
     } catch (error) {
       setErrorMessage(error.message);
@@ -62,14 +52,18 @@ const RegisterForm = () => {
       </div>
 
       <div className="login-form-side">
-        <form onSubmit={handleSubmit}>
+        <form
+          noValidate
+          className={validated ? "was-validated" : ""}
+          onSubmit={handleSubmit}
+        >
           <h2 className="text-center mb-4">Create Account</h2>
 
           {errorMessage && (
             <div className="alert alert-danger">{errorMessage}</div>
           )}
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="name">Full Name</label>
             <input
               type="text"
@@ -79,13 +73,12 @@ const RegisterForm = () => {
               placeholder="Enter full name"
               value={formData.name}
               onChange={handleChange}
+              required
             />
-            {submitted && formData.name === "" && (
-              <div className="text-danger">Name is required</div>
-            )}
+            <div className="invalid-feedback">Name is required</div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
@@ -95,13 +88,12 @@ const RegisterForm = () => {
               placeholder="Enter email"
               value={formData.email}
               onChange={handleChange}
+              required
             />
-            {submitted && formData.email === "" && (
-              <div className="text-danger">Email is required</div>
-            )}
+            <div className="invalid-feedback">Valid email is required</div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -111,13 +103,12 @@ const RegisterForm = () => {
               placeholder="Enter username"
               value={formData.username}
               onChange={handleChange}
+              required
             />
-            {submitted && formData.username === "" && (
-              <div className="text-danger">Username is required</div>
-            )}
+            <div className="invalid-feedback">Username is required</div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -127,12 +118,12 @@ const RegisterForm = () => {
               placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
+              minLength={6}
+              required
             />
-            {submitted && formData.password.length < 6 && (
-              <div className="text-danger">
-                Password must be at least 6 characters
-              </div>
-            )}
+            <div className="invalid-feedback">
+              Password must be at least 6 characters
+            </div>
           </div>
 
           <button type="submit" className="btn-login">

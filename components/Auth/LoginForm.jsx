@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import loginImage from "../../src/assets/login.jpg";
 import "./LoginForm.css";
 
@@ -7,7 +8,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,12 +16,10 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setValidated(true);
 
-    if (!formData.username || formData.password.length < 6) {
-      setErrorMessage("Username and password are required (min 6 characters)");
-      return;
-    }
+    const form = e.currentTarget;
+    if (!form.checkValidity()) return;
 
     try {
       console.log("🔐 Enviando datos de login:", formData);
@@ -37,10 +36,8 @@ const LoginForm = () => {
       console.log("📩 Respuesta del backend:", data);
 
       if (!response.ok) {
-        // Mejor manejo de errores, muestra la respuesta completa.
         const errorMessage =
           data?.detail || data?.error || "Credenciales inválidas";
-        console.warn("⚠️ Login fallido:", errorMessage);
         throw new Error(errorMessage);
       }
 
@@ -49,7 +46,6 @@ const LoginForm = () => {
         console.log("✅ Login exitoso. Token guardado.");
         navigate("/");
       } else {
-        console.error("❌ Login falló: no se recibió el token");
         throw new Error("Login failed: no token received");
       }
     } catch (error) {
@@ -65,15 +61,21 @@ const LoginForm = () => {
       </div>
 
       <div className="login-form-side">
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className={`needs-validation ${validated ? "was-validated" : ""}`}
+          noValidate
+        >
           <h2 className="text-center mb-4">Welcome</h2>
 
           {errorMessage && (
             <div className="alert alert-danger">{errorMessage}</div>
           )}
 
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -82,14 +84,15 @@ const LoginForm = () => {
               placeholder="Enter username"
               value={formData.username}
               onChange={handleChange}
+              required
             />
-            {submitted && formData.username === "" && (
-              <div className="text-danger">Username is required</div>
-            )}
+            <div className="invalid-feedback">Username is required</div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -98,21 +101,21 @@ const LoginForm = () => {
               placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
+              required
+              minLength={6}
             />
-            {submitted && formData.password.length < 6 && (
-              <div className="text-danger">
-                Password must be at least 6 characters
-              </div>
-            )}
+            <div className="invalid-feedback">
+              Password must be at least 6 characters
+            </div>
           </div>
 
-          <button type="submit" className="btn-login">
+          <button type="submit" className="btn btn-dark w-100">
             Login
           </button>
 
           <div className="form-text text-center mt-3">
             Not Registered?{" "}
-            <Link to="/register" className="text-dark">
+            <Link to="/register" className="text-dark fw-bold">
               Create an Account
             </Link>
           </div>

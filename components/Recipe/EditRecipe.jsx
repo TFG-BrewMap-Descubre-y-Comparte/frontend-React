@@ -7,12 +7,13 @@ import cafeImage from "../../src/assets/imagenesRecetas/sibarist20223481_1200x12
 const EditRecipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [recipe, setRecipe] = useState({
     tittle: "",
     description: "",
     metodo: "",
     origen: "",
-    isActive: false, // Añadido checkbox
+    isActive: false,
   });
 
   const [validated, setValidated] = useState(false);
@@ -68,6 +69,7 @@ const EditRecipe = () => {
     <div className="container mt-5">
       <div className="edit__wrapper shadow-lg">
         <div className="row no-gutters">
+          {/* Imagen lateral */}
           <div className="col-lg-5 info__wrapper gradient-brand-color p-0 order-lg-2">
             <img
               src={cafeImage}
@@ -81,15 +83,17 @@ const EditRecipe = () => {
             />
           </div>
 
+          {/* Formulario */}
           <div className="col-lg-7 form__wrapper p-5 order-lg-1">
-            <h3 className="mb-4">Editar Receta</h3>
+            <h3 className="mb-4">Edit Recipe</h3>
             <form
               onSubmit={handleSubmit}
               className={`needs-validation ${validated ? "was-validated" : ""}`}
               noValidate
             >
+              {/* Título */}
               <div className="mb-3">
-                <label className="form-label">Título</label>
+                <label className="form-label">Title</label>
                 <input
                   className="form-control"
                   name="tittle"
@@ -97,13 +101,12 @@ const EditRecipe = () => {
                   onChange={handleChange}
                   required
                 />
-                <div className="invalid-feedback">
-                  El título es obligatorio.
-                </div>
+                <div className="invalid-feedback">The title is compulsory.</div>
               </div>
 
+              {/* Descripción */}
               <div className="mb-3">
-                <label className="form-label">Descripción</label>
+                <label className="form-label">Description</label>
                 <textarea
                   className="form-control"
                   name="description"
@@ -113,12 +116,13 @@ const EditRecipe = () => {
                   required
                 ></textarea>
                 <div className="invalid-feedback">
-                  La descripción es obligatoria.
+                  Description is mandatory.
                 </div>
               </div>
 
+              {/* Método */}
               <div className="mb-3">
-                <label className="form-label">Método</label>
+                <label className="form-label">Method</label>
                 <select
                   className="form-select"
                   name="metodo"
@@ -126,7 +130,7 @@ const EditRecipe = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecciona un método</option>
+                  <option value="">Select a method</option>
                   <option value="AeroPress">AeroPress</option>
                   <option value="Kalita">Kalita</option>
                   <option value="Orea">Orea</option>
@@ -135,11 +139,12 @@ const EditRecipe = () => {
                   <option value="ColdBrew">ColdBrew</option>
                   <option value="BlackList Drip">BlackList Drip</option>
                 </select>
-                <div className="invalid-feedback">Selecciona un método.</div>
+                <div className="invalid-feedback">Select a method.</div>
               </div>
 
+              {/* Origen */}
               <div className="mb-3">
-                <label className="form-label">Origen</label>
+                <label className="form-label">Origin</label>
                 <select
                   className="form-select"
                   name="origen"
@@ -147,7 +152,7 @@ const EditRecipe = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecciona un origen</option>
+                  <option value="">Select an origin</option>
                   <option value="Etiopía">Etiopía</option>
                   <option value="Colombia">Colombia</option>
                   <option value="Brasil">Brasil</option>
@@ -157,9 +162,10 @@ const EditRecipe = () => {
                   <option value="El Salvador">El Salvador</option>
                   <option value="Panamá">Panamá</option>
                 </select>
-                <div className="invalid-feedback">Selecciona un origen.</div>
+                <div className="invalid-feedback">Select an origin.</div>
               </div>
 
+              {/* Checkbox */}
               <div className="form-check mb-3">
                 <input
                   className="form-check-input"
@@ -170,12 +176,17 @@ const EditRecipe = () => {
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="isActive">
-                  Acepto editar la receta
+                  I agree to edit the recipe
                 </label>
               </div>
 
-              <button type="submit" className="btn btn-dark mt-3">
-                Guardar Cambios
+              {/* Botón */}
+              <button
+                type="submit"
+                className="btn btn-dark mt-3"
+                disabled={!recipe.isActive}
+              >
+                Save Changes
               </button>
             </form>
           </div>

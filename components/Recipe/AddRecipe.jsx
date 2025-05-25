@@ -70,14 +70,14 @@ const AddRecipe = () => {
           </div>
 
           <div className="col-lg-7 form__wrapper p-5 order-lg-1">
-            <h3 className="mb-4">Añadir Receta</h3>
+            <h3 className="mb-4">Add Recipe</h3>
             <form
               onSubmit={handleSubmit}
               className={`needs-validation ${validated ? "was-validated" : ""}`}
               noValidate
             >
               <div className="mb-3">
-                <label className="form-label">Título</label>
+                <label className="form-label">Title</label>
                 <input
                   className="form-control"
                   name="tittle"
@@ -85,13 +85,11 @@ const AddRecipe = () => {
                   onChange={handleChange}
                   required
                 />
-                <div className="invalid-feedback">
-                  El título es obligatorio.
-                </div>
+                <div className="invalid-feedback">The title is compulsory.</div>
               </div>
 
               <div className="mb-3">
-                <label className="form-label">Descripción</label>
+                <label className="form-label">Description</label>
                 <textarea
                   className="form-control"
                   name="description"
@@ -101,12 +99,12 @@ const AddRecipe = () => {
                   required
                 ></textarea>
                 <div className="invalid-feedback">
-                  La descripción es obligatoria.
+                  Description is mandatory.
                 </div>
               </div>
 
               <div className="mb-3">
-                <label className="form-label">Método</label>
+                <label className="form-label">Method</label>
                 <select
                   className="form-select"
                   name="metodo"
@@ -114,7 +112,7 @@ const AddRecipe = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecciona un método</option>
+                  <option value="">Select a method</option>
                   <option value="AeroPress">AeroPress</option>
                   <option value="Kalita">Kalita</option>
                   <option value="Orea">Orea</option>
@@ -123,11 +121,11 @@ const AddRecipe = () => {
                   <option value="ColdBrew">ColdBrew</option>
                   <option value="BlackList Drip">BlackList Drip</option>
                 </select>
-                <div className="invalid-feedback">Selecciona un método.</div>
+                <div className="invalid-feedback">Select a method.</div>
               </div>
 
               <div className="mb-3">
-                <label className="form-label">Origen</label>
+                <label className="form-label">Origin</label>
                 <select
                   className="form-select"
                   name="origen"
@@ -135,7 +133,7 @@ const AddRecipe = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecciona un origen</option>
+                  <option value="">Select an origin</option>
                   <option value="Etiopía">Etiopía</option>
                   <option value="Colombia">Colombia</option>
                   <option value="Brasil">Brasil</option>
@@ -145,11 +143,11 @@ const AddRecipe = () => {
                   <option value="El Salvador">El Salvador</option>
                   <option value="Panamá">Panamá</option>
                 </select>
-                <div className="invalid-feedback">Selecciona un origen.</div>
+                <div className="invalid-feedback">Select an origin</div>
               </div>
 
               <button type="submit" className="btn btn-dark mt-3">
-                Crear Receta
+                Create Recipe
               </button>
             </form>
           </div>

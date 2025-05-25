@@ -85,7 +85,7 @@ const RecipeList = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4 text-center">Lista de Recetas</h3>
+      <h3 className="mb-4 text-center">List of recipes</h3>
 
       <div className="row gx-4 gy-4">
         {recipes.map((recipe) => (
