@@ -10,23 +10,21 @@ const RecipeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState("");
   const recipesPerPage = 6;
 
   useEffect(() => {
     fetchRecipes(currentPage);
-
     const token = localStorage.getItem("access_token");
-    const decoded = token && window.atob(token.split(".")[1]);
-    console.log(JSON.parse(decoded));
 
     if (token) {
       try {
         const decoded = jwtDecode(token);
         setUserId(Number(decoded.id_user));
-
-        // Ajusta según tu JWT
+        setUsername(decoded.sub);
       } catch (error) {
-        console.error("Error al decodificar el token:", error);
+        console.error("Token inválido:", error);
+        localStorage.removeItem("access_token");
       }
     }
   }, [currentPage]);
@@ -38,34 +36,41 @@ const RecipeList = () => {
           page - 1
         }&size=${recipesPerPage}`
       );
+
+      if (!response.ok) throw new Error("Error al obtener recetas");
+
       const data = await response.json();
       setRecipes(data.content || []);
       setTotalPages(data.totalPages || 1);
     } catch (error) {
-      console.error("Error fetching recipes:", error);
+      console.error("Error al cargar recetas:", error);
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const token = localStorage.getItem("access_token");
-    fetch(`http://localhost:8084/api/v1/recipe/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log(`Receta con id ${id} eliminada correctamente.`);
-          fetchRecipes(currentPage);
-        } else {
-          console.error(`Error al eliminar la receta con id ${id}.`);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8084/api/v1/recipe/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
         }
-      })
-      .catch((error) => {
-        console.error("Error al intentar eliminar la receta:", error);
-      });
+      );
+
+      if (response.ok) {
+        console.log(`Receta ${id} eliminada correctamente`);
+        fetchRecipes(currentPage);
+      } else {
+        console.error(`Error al eliminar receta con ID ${id}`);
+      }
+    } catch (error) {
+      console.error("Error de red al eliminar receta:", error);
+    }
   };
 
   const handlePageChange = (newPage) => {
@@ -76,53 +81,56 @@ const RecipeList = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4 text-center">Recipe List</h3>
+      <h3 className="mb-4 text-center">Lista de Recetas</h3>
 
       <div className="row gx-4 gy-4">
-        {recipes.map((recipe, index) => (
-          <div className="col-md-6 d-flex" key={index}>
+        {recipes.map((recipe) => (
+          <div className="col-md-6 d-flex" key={recipe.id}>
             <div className="card recipe-card shadow-sm mx-auto">
               <img
                 src="../../src/assets/imagenesRecetas/sibarist20223481_1200x1200.png"
                 className="card-img-top"
-                alt={recipe.tittle}
+                alt={recipe.tittle || "Imagen receta"}
               />
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{recipe.tittle}</h5>
                 <p className="card-text">{recipe.description}</p>
                 <div className="mt-auto">
                   <small>
-                    <strong>Method:</strong> {recipe.metodo}
+                    <strong>Método:</strong> {recipe.metodo}
                   </small>
                   <br />
                   <small>
-                    <strong>Origin:</strong> {recipe.origen}
+                    <strong>Origen:</strong> {recipe.origen}
+                  </small>
+                  <br />
+                  <small>
+                    <strong>Autor:</strong> {recipe.username}
                   </small>
 
-                  {/* Botones de acción */}
                   <div className="mt-3 d-flex justify-content-between">
                     <button
                       className="btn btn-sm btn-outline-dark"
                       onClick={() => navigate(`/recipe/${recipe.id}`)}
                     >
-                      Details
+                      Detalles
                     </button>
 
-                    {userId && recipe.userId === userId && (
-                      <>
+                    {userId === recipe.userId && (
+                      <div className="d-flex gap-2">
                         <button
                           className="btn btn-sm btn-outline-warning"
                           onClick={() => navigate(`/edit-recipe/${recipe.id}`)}
                         >
-                          Update
+                          Editar
                         </button>
                         <button
                           className="btn btn-sm btn-outline-danger"
                           onClick={() => handleDelete(recipe.id)}
                         >
-                          Delete
+                          Eliminar
                         </button>
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -131,14 +139,15 @@ const RecipeList = () => {
           </div>
         ))}
 
-        {/* Tarjetas vacías para cuadrar diseño */}
-        {Array.from({ length: recipesPerPage - recipes.length }).map(
-          (_, idx) => (
-            <div className="col-md-6 d-flex" key={`empty-${idx}`}>
-              <div className="card recipe-card empty-card mx-auto"></div>
-            </div>
-          )
-        )}
+        {/* Tarjetas vacías para mantener diseño uniforme */}
+        {recipes.length < recipesPerPage &&
+          Array.from({ length: recipesPerPage - recipes.length }).map(
+            (_, idx) => (
+              <div className="col-md-6 d-flex" key={`empty-${idx}`}>
+                <div className="card recipe-card empty-card mx-auto"></div>
+              </div>
+            )
+          )}
       </div>
 
       {/* Paginación */}
@@ -148,17 +157,17 @@ const RecipeList = () => {
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         >
-          Previous
+          Anterior
         </button>
         <span className="align-self-center mx-2">
-          Page {currentPage} of {totalPages}
+          Página {currentPage} de {totalPages}
         </span>
         <button
           className="btn btn-outline-dark ms-2"
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
         >
-          Next
+          Siguiente
         </button>
       </div>
     </div>
