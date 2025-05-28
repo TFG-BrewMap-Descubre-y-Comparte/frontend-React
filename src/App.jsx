@@ -12,6 +12,7 @@ import TarjetaRoutesCoffee from "../components/TarjetaRoutesCoffee";
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
 import RecipeList from "../components/Recipe/RecipeList";
+import FavoriteRecipe from "../components/Recipe/FavoriteRecipe";
 import RecipeDetails from "../components/Recipe/RecipeDetails";
 import AddRecipe from "../components/Recipe/AddRecipe";
 import EditRecipe from "../components/Recipe/EditRecipe";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/route/:idRoute" element={<RouteForm />} />
         <Route path="/routeCoffee/:idRoute" element={<RouteCoffeShop />} />
         <Route path="/recipes" element={<RecipeList />} />
+        <Route path="/favorite-recipe" element={<FavoriteRecipe />} />
         <Route path="/add-recipe" element={<AddRecipe />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/edit-recipe/:id" element={<EditRecipe />} />

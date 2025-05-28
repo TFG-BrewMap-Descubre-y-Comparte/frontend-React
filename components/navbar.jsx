@@ -198,7 +198,7 @@ const Navbar = () => {
             onMouseLeave={() => setOpenDropdown(null)}
             style={{ position: "relative" }}
           >
-            <span style={styles.link}>Recetario</span>
+            <span style={styles.link}>Recipe</span>
             {openDropdown === "recetas" && (
               <div style={styles.submenu}>
                 {!username && (
@@ -207,12 +207,17 @@ const Navbar = () => {
                   </Link>
                 )}
                 <Link to="/recipes" style={styles.submenuItem}>
-                  Lista de Recetas
+                  List of recipes
                 </Link>
                 {username && (
-                  <Link to="/add-recipe" style={styles.submenuItem}>
-                    Añadir Receta
-                  </Link>
+                  <>
+                    <Link to="/favorite-recipe" style={styles.submenuItem}>
+                      My favourite recipes
+                    </Link>
+                    <Link to="/add-recipe" style={styles.submenuItem}>
+                      Add Recipe
+                    </Link>
+                  </>
                 )}
               </div>
             )}
