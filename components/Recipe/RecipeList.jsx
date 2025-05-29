@@ -16,6 +16,7 @@ const RecipeList = () => {
   const [favorites, setFavorites] = useState({});
   const [selectedRecipeQR, setSelectedRecipeQR] = useState(null);
   const [showQR, setShowQR] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState("");
   const recipesPerPage = 6;
 
   useEffect(() => {
@@ -34,16 +35,20 @@ const RecipeList = () => {
       }
     }
 
-    fetchRecipes(currentPage);
-  }, [currentPage]);
+    fetchRecipes(currentPage, selectedMethod);
+  }, [currentPage, selectedMethod]);
 
-  const fetchRecipes = async (page) => {
+  const fetchRecipes = async (page, method = "") => {
     try {
-      const response = await fetch(
-        `http://localhost:8084/api/v1/recipes?page=${
-          page - 1
-        }&size=${recipesPerPage}`
-      );
+      const baseUrl = method
+        ? `http://localhost:8084/api/v1/method/${method}`
+        : "http://localhost:8084/api/v1/recipes";
+
+      const url = new URL(baseUrl);
+      url.searchParams.append("page", page - 1);
+      url.searchParams.append("size", recipesPerPage);
+
+      const response = await fetch(url.toString());
 
       if (!response.ok) throw new Error("Error al obtener recetas");
 
@@ -160,10 +165,32 @@ const RecipeList = () => {
   return (
     <div className="container mt-4">
       <h3 className="mb-4 text-center">List of recipes</h3>
+      <div className="mb-3 d-flex justify-content-start">
+        <select
+          className="form-select w-auto"
+          value={selectedMethod}
+          onChange={(e) => {
+            setCurrentPage(1);
+            setSelectedMethod(e.target.value);
+          }}
+        >
+          <option value="">All methods</option>
+          <option value="AeroPress">AeroPress</option>
+          <option value="Kalita">Kalita</option>
+          <option value="Orea">Orea</option>
+          <option value="V60">V60</option>
+          <option value="Origami">Origami</option>
+          <option value="ColdBrew">ColdBrew</option>
+          <option value="BlackList Drip">BlackList Drip</option>
+        </select>
+      </div>
 
       <div className="row gx-4 gy-4">
         {recipes.map((recipe) => (
-          <div className="col-md-6 d-flex" key={recipe.id}>
+          <div
+            className={`col-md-${recipes.length === 1 ? "12" : "6"} d-flex`}
+            key={recipe.id}
+          >
             <div className="card recipe-card shadow-sm mx-auto">
               <img
                 src="/src/assets/imagenesRecetas/sibarist20223481_1200x1200.png"
