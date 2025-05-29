@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { QRCodeCanvas } from "qrcode.react";
 import "./RecipeList.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,6 +14,8 @@ const RecipeList = () => {
   const [username, setUsername] = useState("");
   const [userRole, setUserRole] = useState("");
   const [favorites, setFavorites] = useState({});
+  const [selectedRecipeQR, setSelectedRecipeQR] = useState(null);
+  const [showQR, setShowQR] = useState(false);
   const recipesPerPage = 6;
 
   useEffect(() => {
@@ -188,7 +191,25 @@ const RecipeList = () => {
                       className="btn btn-sm btn-outline-dark"
                       onClick={() => navigate(`/recipe/${recipe.id}`)}
                     >
-                      Detalles
+                      Details
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-dark d-flex align-items-center gap-1"
+                      onClick={() => {
+                        setSelectedRecipeQR(recipe.id);
+                        setShowQR(true);
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-share-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5" />
+                      </svg>
                     </button>
 
                     <div className="d-flex align-items-center gap-2">
@@ -237,14 +258,37 @@ const RecipeList = () => {
                               navigate(`/edit-recipe/${recipe.id}`)
                             }
                           >
-                            Editar
+                            Edit
                           </button>
                           <button
                             className="btn btn-sm btn-outline-danger"
                             onClick={() => handleDelete(recipe.id)}
                           >
-                            Eliminar
+                            Delete
                           </button>
+                        </div>
+                      )}
+                      {showQR && selectedRecipeQR && (
+                        <div
+                          className="qr-modal-overlay"
+                          onClick={() => setShowQR(false)}
+                        >
+                          <div
+                            className="qr-modal-content"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <h5>Scan to see the recipe</h5>
+                            <QRCodeCanvas
+                              value={`http://localhost:5173/recipe/${selectedRecipeQR}`}
+                              size={256}
+                            />
+                            <button
+                              className="btn btn-sm btn-secondary mt-3"
+                              onClick={() => setShowQR(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -265,23 +309,37 @@ const RecipeList = () => {
           )}
       </div>
 
-      <div className="d-flex justify-content-center mt-4">
+      <div className="d-flex justify-content-center mt-4 gap-2">
         <button
-          className="btn btn-outline-dark me-2"
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(1)}
           disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
         >
-          Anterior
+          First Page
         </button>
-        <span className="align-self-center mx-2">
-          Página {currentPage} de {totalPages}
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="align-self-center">
+          Page {currentPage} of {totalPages}
         </span>
         <button
-          className="btn btn-outline-dark ms-2"
-          disabled={currentPage === totalPages}
+          className="btn btn-outline-secondary"
           onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
         >
-          Siguiente
+          Next
+        </button>
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last Page
         </button>
       </div>
     </div>

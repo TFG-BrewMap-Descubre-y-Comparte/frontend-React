@@ -74,7 +74,11 @@ const FavoriteRecipe = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4 text-center">My List of recipes favorites</h3>
+      <h3 className="mb-4 text-center">
+        {username
+          ? `${username} Favorite Recipes`
+          : "My List of Favorite Recipes"}
+      </h3>
 
       <div className="row gx-4 gy-4">
         {recipes.map((recipe) => (
@@ -90,15 +94,15 @@ const FavoriteRecipe = () => {
                 <p className="card-text">{recipe.description}</p>
                 <div className="mt-auto">
                   <small>
-                    <strong>Método:</strong> {recipe.metodo}
+                    <strong>Method:</strong> {recipe.metodo}
                   </small>
                   <br />
                   <small>
-                    <strong>Origen:</strong> {recipe.origen}
+                    <strong>Origin:</strong> {recipe.origen}
                   </small>
                   <br />
                   <small>
-                    <strong>Autor:</strong> {recipe.username}
+                    <strong>Author:</strong> {recipe.username}
                   </small>
 
                   <div className="mt-3 d-flex justify-content-between">
@@ -106,7 +110,7 @@ const FavoriteRecipe = () => {
                       className="btn btn-sm btn-outline-dark"
                       onClick={() => navigate(`/recipe/${recipe.id}`)}
                     >
-                      Detalles
+                      Details
                     </button>
                   </div>
                 </div>
@@ -127,23 +131,37 @@ const FavoriteRecipe = () => {
       </div>
 
       {/* Paginación */}
-      <div className="d-flex justify-content-center mt-4">
+      <div className="d-flex justify-content-center mt-4 gap-2">
         <button
-          className="btn btn-outline-dark me-2"
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(1)}
           disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
         >
-          Anterior
+          First Page
         </button>
-        <span className="align-self-center mx-2">
-          Página {currentPage} de {totalPages}
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="align-self-center">
+          Page {currentPage} of {totalPages}
         </span>
         <button
-          className="btn btn-outline-dark ms-2"
-          disabled={currentPage === totalPages}
+          className="btn btn-outline-secondary"
           onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
         >
-          Siguiente
+          Next
+        </button>
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last Page
         </button>
       </div>
     </div>
