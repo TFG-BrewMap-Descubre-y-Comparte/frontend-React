@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TextPressure from "../components/TextPressure";
+import TextPressure from "./TextPressure";
 
 const handleAnimationComplete = () => {};
 
