@@ -1,5 +1,5 @@
 import Navbar from "../components/navbar";
-import Slideshow from "../components/SlideShow";
+import Slideshow from "../components/Slideshow";
 import Ventajas from "../components/Ventajas";
 import SeccionTira from "../components/SeccionTira";
 import SeccionEquipo from "../components/SeccionEquipo";
