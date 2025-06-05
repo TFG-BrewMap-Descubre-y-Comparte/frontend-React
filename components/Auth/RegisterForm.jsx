@@ -37,7 +37,11 @@ const RegisterForm = () => {
       });
 
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Registration failed");
+      console.log(result);
+
+      if (!response.ok) {
+        throw new Error(result.error || result.detail || "Registration failed");
+      }
 
       navigate("/login");
     } catch (error) {
