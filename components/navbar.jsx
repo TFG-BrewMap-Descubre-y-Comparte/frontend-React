@@ -173,7 +173,7 @@ const Navbar = () => {
         >
           <li>
             <Link to="/" style={styles.link}>
-              Inicio
+              Home
             </Link>
           </li>
           <li
@@ -185,10 +185,10 @@ const Navbar = () => {
             {openDropdown === "rutas" && (
               <div style={styles.submenu}>
                 <Link to="/cities" style={styles.submenuItem}>
-                  Rutas turísticas
+                  Tourist routes
                 </Link>
                 <Link to="/coffeeCities" style={styles.submenuItem}>
-                  Rutas de café
+                  Coffee routes
                 </Link>
               </div>
             )}
@@ -201,11 +201,6 @@ const Navbar = () => {
             <span style={styles.link}>Recipe</span>
             {openDropdown === "recetas" && (
               <div style={styles.submenu}>
-                {!username && (
-                  <Link to="/login" style={styles.submenuItem}>
-                    Login
-                  </Link>
-                )}
                 <Link to="/recipes" style={styles.submenuItem}>
                   List of recipes
                 </Link>
@@ -224,14 +219,21 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/about" style={styles.link}>
-              Acerca
+              About
             </Link>
           </li>
           <li>
             <Link to="/contact" style={styles.link}>
-              Contacto
+              Contact
             </Link>
           </li>
+          {!username && (
+            <li>
+              <Link to="/login" style={styles.link}>
+                Login
+              </Link>
+            </li>
+          )}
           {username && (
             <li style={styles.usernameContainer}>
               <span style={styles.username}>{username}</span>
@@ -265,51 +267,127 @@ const Navbar = () => {
         </button>
         <ul style={styles.mobileNavLinks}>
           <li>
-            <Link to="/" style={styles.link}>
-              Inicio
+            <Link
+              to="/"
+              style={styles.link}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+          </li>
+
+          {/* Submenú Rutas */}
+          <li>
+            <span
+              style={styles.link}
+              onClick={() =>
+                setOpenDropdown(openDropdown === "routes" ? null : "routes")
+              }
+            >
+              Routes ▾
+            </span>
+            {openDropdown === "routes" && (
+              <>
+                <Link
+                  to="/cities"
+                  style={styles.submenuItem}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Tourist routes
+                </Link>
+                <Link
+                  to="/coffeeCities"
+                  style={styles.submenuItem}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Coffee routes
+                </Link>
+              </>
+            )}
+          </li>
+
+          {/* Submenú Recetas */}
+          <li>
+            <span
+              style={styles.link}
+              onClick={() =>
+                setOpenDropdown(openDropdown === "recetas" ? null : "recetas")
+              }
+            >
+              Recipe ▾
+            </span>
+            {openDropdown === "recetas" && (
+              <>
+                <Link
+                  to="/recipes"
+                  style={styles.submenuItem}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  List of recipes
+                </Link>
+                {username && (
+                  <>
+                    <Link
+                      to="/favorite-recipe"
+                      style={styles.submenuItem}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      My favourite recipes
+                    </Link>
+                    <Link
+                      to="/add-recipe"
+                      style={styles.submenuItem}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Add Recipe
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
+          </li>
+
+          <li>
+            <Link
+              to="/about"
+              style={styles.link}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              About
             </Link>
           </li>
           <li>
-            <Link to="/cities" style={styles.link}>
-              Rutas turísticas
+            <Link
+              to="/contact"
+              style={styles.link}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Contact
             </Link>
           </li>
-          <li>
-            <Link to="/coffeeCities" style={styles.link}>
-              Rutas de café
-            </Link>
-          </li>
-          <li>
-            <Link to="/recipes" style={styles.link}>
-              Recetario
-            </Link>
-          </li>
-          {username && (
-            <Link to="/add-recipe" style={styles.submenuItem}>
-              Añadir Receta
-            </Link>
-          )}
+
           {!username && (
             <li>
-              <Link to="/login" style={styles.link}>
+              <Link
+                to="/login"
+                style={styles.link}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Login
               </Link>
             </li>
           )}
-          <li>
-            <Link to="/about" style={styles.link}>
-              Acerca
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" style={styles.link}>
-              Contacto
-            </Link>
-          </li>
+
           {username && (
             <li style={styles.usernameContainer}>
               <span style={styles.username}>{username}</span>
-              <button style={styles.logoutBtn} onClick={handleLogout}>
+              <button
+                style={styles.logoutBtn}
+                onClick={() => {
+                  handleLogout();
+                  setIsMobileMenuOpen(false);
+                }}
+              >
                 Logout
               </button>
             </li>
