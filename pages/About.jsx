@@ -1,6 +1,6 @@
-import  { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const About = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,16 +11,45 @@ const About = () => {
       {isMobileMenuOpen && (
         <div className="mobile-menu">
           <div className="mobile-menu-content">
-            <button onClick={() => setIsMobileMenuOpen(false)} className="close-button">
-              <svg className="close-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="close-button"
+            >
+              <svg
+                className="close-icon"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
             <ul className="mobile-menu-list">
-              <li><Link to="/" className="mobile-menu-item">Inicio</Link></li>
-              <li><Link to="#" className="mobile-menu-item">Empezar</Link></li>
-              <li><Link to="/about" className="mobile-menu-item">Acerca</Link></li>
-              <li><Link to="/contact" className="mobile-menu-item">Contacto</Link></li>
+              <li>
+                <Link to="/" className="mobile-menu-item">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="#" className="mobile-menu-item">
+                  Start
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="mobile-menu-item">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="mobile-menu-item">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -29,17 +58,23 @@ const About = () => {
       {/* Sección de contenido */}
       <section className="content-section">
         <div className="content-container">
-          <h2 className="content-title">Sobre Nosotros</h2>
+          <h2 className="content-title">About us</h2>
 
           {/* Tarjetas */}
           <div className="cards-container">
             <div className="card">
               <div className="card-image">
-                <img src="../src/assets/panoramicaSevilla.jpeg" alt="Equipo de trabajo" />
+                <img
+                  src="../src/assets/panoramicaSevilla.jpeg"
+                  alt="Equipo de trabajo"
+                />
               </div>
               <div className="card-content">
-                <h3 className="card-title">Quiénes Somos</h3>
-                <p className="card-text">Somos un equipo apasionado y comprometido en ofrecer soluciones innovadoras.</p>
+                <h3 className="card-title">Who we are</h3>
+                <p className="card-text">
+                  We are a passionate team committed to delivering innovative
+                  solutions.
+                </p>
               </div>
             </div>
 
@@ -48,8 +83,10 @@ const About = () => {
                 <img src="../src/assets/movilGPS.jpeg" alt="Misión" />
               </div>
               <div className="card-content">
-                <h3 className="card-title">Nuestra Misión</h3>
-                <p className="card-text">Transformar ideas en realidades mediante servicios de alta calidad.</p>
+                <h3 className="card-title">Our Mission Statement</h3>
+                <p className="card-text">
+                  Transforming ideas into reality through high quality services.
+                </p>
               </div>
             </div>
 
@@ -58,8 +95,10 @@ const About = () => {
                 <img src="../src/assets/imagenTuristas.jpeg" alt="Valores" />
               </div>
               <div className="card-content">
-                <h3 className="card-title">Nuestros Valores</h3>
-                <p className="card-text">Nos guiamos por la integridad, el respeto y la innovación.</p>
+                <h3 className="card-title">Our Values</h3>
+                <p className="card-text">
+                  We are guided by integrity, respect and innovation.
+                </p>
               </div>
             </div>
           </div>

@@ -108,7 +108,7 @@ const styles = {
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Esto es para pantallas pequeñas y medianas
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
     gap: "2rem",
     justifyContent: "center",
     alignItems: "center",

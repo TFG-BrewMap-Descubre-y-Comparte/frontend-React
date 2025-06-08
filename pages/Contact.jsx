@@ -1,12 +1,12 @@
-import { useState } from 'react';  // Importamos useState para manejar el estado
-import Footer from '../components/Footer'; // Importa el Footer desde la carpeta de componentes
+import { useState } from "react"; // Importamos useState para manejar el estado
+import Footer from "../components/Footer"; // Importa el Footer desde la carpeta de componentes
 
 const Contact = () => {
   const [formSent, setFormSent] = useState(false); // Estado para controlar el mensaje de éxito
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Previene que el formulario recargue la página
-    setFormSent(true);  // Muestra el mensaje de éxito
+    setFormSent(true); // Muestra el mensaje de éxito
   };
 
   return (
@@ -15,31 +15,51 @@ const Contact = () => {
         <div className="content-container">
           <h2 className="content-title">Contacto</h2>
           <p>
-            Estamos aquí para ayudarte. Si tienes alguna pregunta, no dudes en
-            ponerte en contacto con nosotros a través del siguiente formulario o
-            utilizando los datos de contacto proporcionados.
+            We are here to help you. If you have any questions, please feel free
+            to contact us at using the form below or using the contact details
+            provided.
           </p>
 
           {/* Mostrar mensaje de éxito si el formulario fue enviado */}
-          {formSent && <p className="success-message">¡Mensaje enviado correctamente!</p>}
+          {formSent && (
+            <p className="success-message">Message sent successfully!</p>
+          )}
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Nombre</label>
-            <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Tu nombre"
+            />
 
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="Tu correo electrónico" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Tu correo electrónico"
+            />
 
-            <label htmlFor="message">Mensaje</label>
-            <textarea id="message" name="message" required rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+            <label htmlFor="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="4"
+              placeholder="Escribe tu mensaje aquí"
+            ></textarea>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Send</button>
           </form>
 
           <div>
-            <h3>O contáctanos directamente:</h3>
+            <h3>Or contact us directly:</h3>
             <p>Email: contacto@rutasapp.com</p>
-            <p>Teléfono: +34 123 456 789</p>
+            <p>Telephone: +34 123 456 789</p>
           </div>
         </div>
       </section>

@@ -16,12 +16,15 @@ import FavoriteRecipe from "../components/Recipe/FavoriteRecipe";
 import RecipeDetails from "../components/Recipe/RecipeDetails";
 import AddRecipe from "../components/Recipe/AddRecipe";
 import EditRecipe from "../components/Recipe/EditRecipe";
+import PrivateRoute from "../components/Auth/PrivateRoute";
+import NotFound from "../pages/NotFound";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
+        {/* Rutas públicas */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -35,12 +38,35 @@ function App() {
         <Route path="/route/:idRoute" element={<RouteForm />} />
         <Route path="/routeCoffee/:idRoute" element={<RouteCoffeShop />} />
         <Route path="/recipes" element={<RecipeList />} />
-        <Route path="/favorite-recipe" element={<FavoriteRecipe />} />
-        <Route path="/add-recipe" element={<AddRecipe />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/edit-recipe/:id" element={<EditRecipe />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="*" element={<NotFound />} />
+        {/* Rutas protegidas */}
+        <Route
+          path="/favorite-recipe"
+          element={
+            <PrivateRoute>
+              <FavoriteRecipe />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-recipe"
+          element={
+            <PrivateRoute>
+              <AddRecipe />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edit-recipe/:id"
+          element={
+            <PrivateRoute>
+              <EditRecipe />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );

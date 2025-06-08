@@ -1,19 +1,22 @@
-
 const Tira = () => {
   return (
     <section style={styles.tiraSection}>
       <div style={styles.backgroundOverlay}></div>
       <div style={styles.container}>
-        <h2 style={styles.title}>Más de 30 Rutas Disponibles</h2>
+        <h2 style={styles.title}>More than 30 Routes Available</h2>
         <p style={styles.subtitle}>
-          Explora ahora las rutas más importantes de Sevilla, Madrid, Barcelona y Valencia
+          Explore now the most important routes from Seville, Madrid, Barcelona
+          and Valencia.
         </p>
         <div style={styles.buttonContainer}>
-          <a href="/start" style={styles.primaryButton}>
-            VER RUTAS
+          <a href="/cities" style={styles.primaryButton}>
+            SEE TOURIST ROUTES
+          </a>
+          <a href="/coffeeCities" style={styles.primaryButton}>
+            SEE COFFEE ROUTES
           </a>
           <a href="/about" style={styles.secondaryButton}>
-            QUIÉNES SOMOS
+            WHO WE ARE
           </a>
         </div>
       </div>

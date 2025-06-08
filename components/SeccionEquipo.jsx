@@ -13,7 +13,7 @@ const SeccionEquipo = () => {
 
   return (
     <section style={styles.meetTheTeam}>
-      <h2 style={styles.teamTitle}>Conoce al equipo</h2>
+      <h2 style={styles.teamTitle}>Meet the team</h2>
       <div style={styles.teamContainer}>
         {teamMembers.map((member, index) => (
           <div key={index} style={styles.teamMember}>
