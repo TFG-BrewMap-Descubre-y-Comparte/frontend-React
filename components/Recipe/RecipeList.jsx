@@ -199,7 +199,9 @@ const RecipeList = () => {
               />
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{recipe.tittle}</h5>
-                <p className="card-text">{recipe.description}</p>
+                <p className="card-text recipe-description">
+                  {recipe.description}
+                </p>
                 <div className="mt-auto">
                   <small>
                     <strong>Método:</strong> {recipe.metodo}
