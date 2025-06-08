@@ -1,0 +1,96 @@
+.ventajas-section {
+  padding: 4rem 0;
+  background-color: #fff;
+}
+
+.ventajas-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.ventajas-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+.ventajas-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.ventajas-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ventajas-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Tarjetas */
+.ventajas-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.ventaja-card {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.ventaja-card i {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.ventaja-card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ventaja-card p {
+  color: #4a5568;
+}
+
+.ver-mas {
+  margin-top: 1rem;
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .ventajas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ventajas-image {
+    display: none;
+  }
+
+  .ventajas-cards {
+    grid-template-columns: 1fr;
+  }
+}

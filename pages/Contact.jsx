@@ -132,7 +132,7 @@ const Contact = () => {
           background-color: #3182ce;
         }
 
-        /* Asegura que el Footer se mantenga abajo pero sin bloquear el scroll */
+        
         footer {
           margin-top: auto; /* Empuja el footer a la parte inferior de la página */
         }
